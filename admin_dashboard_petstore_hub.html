@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard | PetStore Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            color: #121c2a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+        .card-shadow {
+            shadow-[0px_4px_20px_rgba(31,41,55,0.04)];
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-white dark:bg-inverse-surface border-r border-border-light dark:border-outline-variant z-50 flex flex-col p-6 shadow-md">
+<div class="mb-10">
+<h1 class="text-headline-md font-headline-md text-primary font-bold tracking-tight">Admin Panel</h1>
+<p class="font-label-lg text-label-lg text-secondary">Management Console</p>
+</div>
+<nav class="flex-grow flex flex-col font-label-lg text-label-lg">
+<!-- Active Tab: Dashboard -->
+<a class="bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-xl px-4 py-3 mb-2 flex items-center gap-3 active:scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 transition-all hover:brightness-110 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Products</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 transition-all hover:brightness-110 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span>Categories</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 transition-all hover:brightness-110 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span>Orders</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 transition-all hover:brightness-110 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="warehouse">warehouse</span>
+<span>Inventory</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 transition-all hover:brightness-110 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Customers</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 transition-all hover:brightness-110 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-border-light flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-border-light shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female administrative manager with a warm smile, set against a blurred clean modern office background. High-end editorial photography style with soft natural lighting and a premium corporate aesthetic, using the PetStore Hub primary green palette as subtle highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmRJfq7pvQOzlwqUq11SkH0k7I4aEeJANHNT8enf0mT1W6LaVFolnbXkvhHXz3u9AtfBSt-HmUf0HfBJY572FA0L4RA0iMclC8MZlwmAZeF9HikdVnUSZWkpJ2Cf49LG381-_DGN1KyDVvqwM2wIcnWpwnGejiB7VoIoPeJ92UVEJm-CSVp0pW8xMBgvBIXRHZbTNfCTgE9nQnDVz8HzPtEE7MBuwsIMTYJlABnG2pkShenHTclzESuahibrSBI1KIiLyrKaG3wtA"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Admin User</span>
+<span class="text-[10px] text-secondary uppercase tracking-widest">Main Admin</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen p-margin-desktop bg-background">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Store Overview</h2>
+<p class="text-body-md text-secondary">Real-time performance and operational insights.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-white border border-border-light text-on-surface px-6 py-3 rounded-xl font-label-lg hover:bg-surface-subtle transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    Last 30 Days
+                </button>
+<button class="bg-primary text-white px-6 py-3 rounded-xl font-label-lg hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Export Report
+                </button>
+</div>
+</header>
+<!-- Analytics Grid (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-10">
+<!-- Total Sales -->
+<div class="bg-white p-8 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light group hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low text-primary rounded-lg group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="text-primary font-bold text-label-lg bg-primary-container/20 px-2 py-1 rounded">+12.5%</span>
+</div>
+<p class="text-secondary font-label-lg uppercase tracking-wider mb-1">Total Sales</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">$124,592.00</h3>
+<p class="text-[12px] text-secondary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                    Compared to $110.7k last month
+                </p>
+</div>
+<!-- Orders -->
+<div class="bg-white p-8 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light group hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low text-primary rounded-lg group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</div>
+<span class="text-primary font-bold text-label-lg bg-primary-container/20 px-2 py-1 rounded">+8.2%</span>
+</div>
+<p class="text-secondary font-label-lg uppercase tracking-wider mb-1">Total Orders</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">3,842</h3>
+<p class="text-[12px] text-secondary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                    Averaging 128 orders per day
+                </p>
+</div>
+<!-- Customers -->
+<div class="bg-white p-8 rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light group hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low text-primary rounded-lg group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</div>
+<span class="text-primary font-bold text-label-lg bg-primary-container/20 px-2 py-1 rounded">+21.0%</span>
+</div>
+<p class="text-secondary font-label-lg uppercase tracking-wider mb-1">New Customers</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">1,209</h3>
+<p class="text-[12px] text-secondary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                    Total community size: 12.5k
+                </p>
+</div>
+</section>
+<!-- Split Layout: Recent Orders & Top Products -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Recent Orders Table -->
+<section class="lg:col-span-2 bg-white rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light overflow-hidden">
+<div class="p-6 border-b border-border-light flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Orders</h3>
+<button class="text-primary font-label-lg hover:underline decoration-2 underline-offset-4">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-subtle text-secondary font-label-lg uppercase text-[12px] tracking-widest">
+<tr>
+<th class="px-6 py-4">Order ID</th>
+<th class="px-6 py-4">Customer</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Amount</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light">
+<tr class="hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-label-lg text-primary">#ORD-9021</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container"></div>
+<span class="font-medium">Sarah Jenkins</span>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary">Oct 24, 2024</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">Delivered</span>
+</td>
+<td class="px-6 py-4 font-bold">$152.40</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-label-lg text-primary">#ORD-9018</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container"></div>
+<span class="font-medium">Marcus Chen</span>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary">Oct 23, 2024</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-secondary">Processing</span>
+</td>
+<td class="px-6 py-4 font-bold">$89.00</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-label-lg text-primary">#ORD-9012</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container"></div>
+<span class="font-medium">Alice Thorne</span>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary">Oct 23, 2024</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error/10 text-error">On Hold</span>
+</td>
+<td class="px-6 py-4 font-bold">$210.50</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-label-lg text-primary">#ORD-8995</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container"></div>
+<span class="font-medium">Greg Harrison</span>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary">Oct 22, 2024</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">Delivered</span>
+</td>
+<td class="px-6 py-4 font-bold">$45.10</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Top Products List -->
+<section class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light flex flex-col overflow-hidden">
+<div class="p-6 border-b border-border-light">
+<h3 class="font-headline-md text-headline-md text-on-surface">Top Products</h3>
+</div>
+<div class="flex-grow p-6 space-y-6 overflow-y-auto max-h-[500px] custom-scrollbar">
+<!-- Product Item 1 -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="Close up product photography of high-quality organic grain-free dog food pellets in a modern minimalist porcelain bowl. Soft afternoon sunlight highlights the textures of the food. Aesthetic is clean, premium, and nature-inspired with a neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY4l8mz9xU0t7I9s5qSJODWSAOiT2LTIOE9RUfpLnNM0hOTRvCZHL8Kc0Eh9vqU5eRBDR3N6_mvTbOdPln_7iqQ0dCHS3AYbQWDLkyeM4h5VvPTCQ2K5HrFlCyOSShaGwGFTbjKXT8PFJHCyGM3UFv3GmB8o25_vrmrheL97aJBdoUDwd0vBEWGxGHI59V_xOf2tsdZJ6ALmFAkRqOMVETYBEY_k8a3G54hgDJ1m3wFVYHzspih70lzf8204cf-uWNV5nK42U3EjY"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface group-hover:text-primary transition-colors">Premium Grain-Free Salmon</h4>
+<p class="text-[12px] text-secondary">245 Units Sold</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">$59.99</p>
+<span class="text-[10px] text-primary font-bold uppercase tracking-widest">+12%</span>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A stylish, minimalist ceramic pet drinking fountain with flowing water, captured in a bright and airy modern home interior. The lighting is crisp and highlights the sleek design of the fountain. High-end editorial grade photography style with a focus on product luxury and functionality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFhq8YAUU4TWLlcyaR5KCoDzXnKfB4PDqhXuHfTdwj8nQHMBT27KG23uQ73sNhowthm9nuxfs9-TQgk6H7ksO9a3nuoDRmgxX1swig2dnUOP2RggMY-Vefbo057oxWUMTe36f3gOQ42erorqNUOLBLZPOE9dCCtfKs0wifZk4SH3k8t7v7sKJ4TQ-nsYcczpNM2vimtuSGhPcdoi8N_rD75He70CNIEARkkKdY-kvR6-GkQab58DinqQfEldL2I6sgIlB6_fgr-a0"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface group-hover:text-primary transition-colors">Ceramic Flow Water Fountain</h4>
+<p class="text-[12px] text-secondary">189 Units Sold</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">$74.50</p>
+<span class="text-[10px] text-primary font-bold uppercase tracking-widest">+5%</span>
+</div>
+</div>
+<!-- Product Item 3 -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A beautifully crafted, ergonomic leather dog harness in a deep forest green color, resting on a clean white marble surface. The detail of the stitching and metallic buckles is sharp. Minimalist aesthetic, luxury brand feel, vibrant yet natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUChQ4OV4vvWZ0W3BHvI9rjMX0oz7fALDflof9Ld8Dyamb-xIjw90sz5ppZNg_Y_I-3rHxGzhdr46x8SbAY1Yxi9O1srUV3McxjsW5gaeo5ZJqVeAG6Z86pqGLNwK0YaW5OmnbjbkWPmGxhLP0_lpwR4UFIzcy1MnwWH6PIZ87A9EDNren5toSJuxwGtcTwr35DhcH3YRa3foLOevu4cSnyR3bxu150OC8Je_C57YDkeJBfwUnVnU_kmdfCIOHzk_a5THT4FJcueY"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface group-hover:text-primary transition-colors">ErgoLeather Harness Set</h4>
+<p class="text-[12px] text-secondary">156 Units Sold</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">$120.00</p>
+<span class="text-[10px] text-primary font-bold uppercase tracking-widest">+18%</span>
+</div>
+</div>
+<!-- Product Item 4 -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="A set of premium, organic catnip toys made from soft textured fabrics in pastel colors. The scene is bright and airy with high-key lighting. The style is modern and sophisticated, appealing to discerning pet owners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTgtx3kNhw95J8at-x5V_T-D1qatcszJ0r5yL6mArjUl1PDqJTwYHWpGHc4l6KQ2OtsAguOLhvCZXVbAQG7q-CpLPMLIIcLVIbE0JK8NUFTQZ6CTnHspWOkbyV_1f_t5BUw105EC8mtlYWeNf047cu0ZIYOreh3Kd3cA6gsVyG7LbtQ0WJxxLjhBo4BM6w5u_HRXMfKvCBWJC7vHNVufl9DovbqpBDQIb6iSdw8itJu3tC29Dy9wFBVyc22zQzvE-e2SKU3NzFzwE"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-on-surface group-hover:text-primary transition-colors">Organic Pastels Toy Bundle</h4>
+<p class="text-[12px] text-secondary">132 Units Sold</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface">$25.00</p>
+<span class="text-[10px] text-secondary font-bold uppercase tracking-widest">Steady</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-subtle text-center">
+<button class="text-secondary font-label-lg hover:text-primary transition-colors flex items-center justify-center gap-2 w-full">
+                        View Product Analytics
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</section>
+</div>
+<!-- System Status & Quick Actions -->
+<section class="mt-10 grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-3 bg-white p-6 rounded-xl border border-border-light flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-secondary text-[12px] uppercase tracking-widest mb-1">System Health</span>
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse"></div>
+<span class="font-bold">All Systems Operational</span>
+</div>
+</div>
+<div class="h-10 w-[1px] bg-border-light hidden md:block"></div>
+<div class="flex flex-col">
+<span class="text-secondary text-[12px] uppercase tracking-widest mb-1">Last Backup</span>
+<span class="font-medium">12 Minutes Ago</span>
+</div>
+<div class="h-10 w-[1px] bg-border-light hidden md:block"></div>
+<div class="flex flex-col">
+<span class="text-secondary text-[12px] uppercase tracking-widest mb-1">Active Staff</span>
+<span class="font-medium">4 Online</span>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Avatar of a male customer support agent with a friendly expression, high-end corporate photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7cLQpyHjPXeHKhzktTJULZHUH0X3YeG7mb2nZMxBI7ebH8kXc-qSstwIwAkx-i5RsuITueb9lvG9BIU89V7luxnCYoKlblfx1S5xLcC_bwdwDDu5WutXeO2cYZtpT6NxDW9Fxw-76frse4Mjx_YWFjXp5Wjq5nGl571c0kzS5ivgw1Z79ZKa3XDqx30RLlOKGnglVtLIb0LsoacDU1Rg3-xjRlhnnt8-7HqRJR0od7HEDWLjzbLaZx5iMseW_j-4B_8oSsr9lpss"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Avatar of a female logistics manager, sharp professional portrait with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVj9JE2iVRIrQrNsh3e0mgDt7d_hgnxSvnGdNmnJ8MlmwP0iMUjDHcj1d0wywSaWk5Of-8pjP5lMtZc1tKSQbTVKwtCiREI2hZ2CZIL_V0TvZmI2LLBBS2L7cQZgygulftawYpL-qqATGGndg7kBLL8lbQ4IqLLFEmnfHwq0JhQoXNbGiI8Ogqw8CSOUXxBI3RvjGbGhhSQ9c4Zy2Wuh-NJMqBSRKhHtoHS22VwxSqY6alw7u0IOomUHqutE5I7xnUnjLPOqxR9Gc"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-secondary">
+                            +2
+                        </div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-highest p-6 rounded-xl flex items-center justify-center gap-3 cursor-pointer hover:brightness-105 transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+<span class="font-bold text-on-primary-container">Support Center</span>
+</div>
+</section>
+</main>
+<script>
+        // Simple micro-interaction for card hover scaling
+        document.querySelectorAll('.grid > div').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                if(card.classList.contains('shadow-sm')) {
+                    card.style.transform = 'translateY(-4px)';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

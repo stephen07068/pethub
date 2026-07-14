@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Product Management | PetStore Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            color: #121c2a;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- Layout Shell -->
+<div class="flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-white dark:bg-inverse-surface shadow-md flex flex-col p-6 border-r border-border-light dark:border-outline-variant z-40">
+<div class="mb-10">
+<h1 class="text-headline-md font-headline-md text-primary mb-1">Admin Panel</h1>
+<p class="text-label-sm text-secondary">Management Console</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Products is Active -->
+<a class="bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-xl px-4 py-3 mb-2 flex items-center gap-3 font-label-lg text-label-lg transition-all active:scale-[0.98] hover:brightness-110" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Products
+                </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 font-label-lg text-label-lg transition-all active:scale-[0.98] hover:brightness-110" href="#">
+<span class="material-symbols-outlined">category</span>
+                    Categories
+                </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 font-label-lg text-label-lg transition-all active:scale-[0.98] hover:brightness-110" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+                    Orders
+                </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 font-label-lg text-label-lg transition-all active:scale-[0.98] hover:brightness-110" href="#">
+<span class="material-symbols-outlined">warehouse</span>
+                    Inventory
+                </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 font-label-lg text-label-lg transition-all active:scale-[0.98] hover:brightness-110" href="#">
+<span class="material-symbols-outlined">group</span>
+                    Customers
+                </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-secondary-container/10 rounded-xl px-4 py-3 mb-2 flex items-center gap-3 font-label-lg text-label-lg transition-all active:scale-[0.98] hover:brightness-110" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-border-light">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern office administrator for a luxury pet brand. The individual is smiling warmly, dressed in minimalist business casual attire. The background is a blurred high-end pet boutique with soft natural lighting and a clean, airy color palette of whites and soft greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5CQyxNQSBd5NxU7m9ipmVtYQHHjUrxzriCeLFFCKkVy2lJOmQ2wSrgAsDqSJGMx5RUbvZcb7SOu736b0M74PWHNxFzymmP6wu5-dmBm2SNedBqLR5WMkXHiZhVXXdJaZ4Qz87UrHom-BlqKppd4LILm0AVbZvO5SIXTL4OsyChgERVDbcViKruvMncIJIpDXey970tGuhc4OvYSdDYaL4DSAgVspZPHlYSX_WEC9TbPJE9eNBZ10b8GtPJj_QXsnGky2tGBCN-w0"/>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Alex Rivera</p>
+<p class="text-xs text-secondary">Store Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[280px] p-margin-desktop bg-background min-h-screen">
+<!-- Page Header Actions -->
+<header class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Product Management</h2>
+<p class="text-body-md text-secondary mt-1">Manage your storefront inventory and product catalog.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-label-lg hover:brightness-110 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                    Add Product
+                </button>
+</header>
+<!-- Filters & Search Bar -->
+<div class="bg-white rounded-2xl p-6 shadow-[0px_4px_20px_rgba(31,41,55,0.04)] mb-6 flex flex-col md:flex-row gap-4 items-center">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full h-12 pl-12 pr-4 rounded-xl border border-border-light focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all text-body-md" placeholder="Search products by name or SKU..." type="text"/>
+</div>
+<div class="flex gap-3 w-full md:w-auto">
+<select class="h-12 px-4 rounded-xl border border-border-light text-secondary font-label-lg focus:border-primary bg-white focus:ring-0">
+<option>All Categories</option>
+<option>Dog Food</option>
+<option>Cat Supplies</option>
+<option>Aquarium</option>
+<option>Wellness</option>
+</select>
+<button class="h-12 px-4 flex items-center gap-2 rounded-xl border border-border-light text-secondary font-label-lg hover:bg-surface-subtle transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+                        Filters
+                    </button>
+</div>
+</div>
+<!-- Product Table -->
+<div class="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] overflow-hidden border border-border-light">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-subtle/50 text-secondary border-b border-border-light">
+<th class="px-6 py-4 font-label-lg">Product</th>
+<th class="px-6 py-4 font-label-lg">Category</th>
+<th class="px-6 py-4 font-label-lg">Price</th>
+<th class="px-6 py-4 font-label-lg text-center">Stock</th>
+<th class="px-6 py-4 font-label-lg">Status</th>
+<th class="px-6 py-4 font-label-lg text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-subtle/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover" data-alt="A premium bag of organic dog food with elegant, minimalist packaging. The design features soft earth tones and a stylized illustration of a golden retriever. The setting is a clean, bright wooden surface with gentle sunlight filtering in, creating a luxurious and reliable atmosphere for high-quality pet nutrition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4va6bj9YeN1HEJIZEnBuLmTfKAdyU4tAc_531Xbgmnbng9-OnyXupRv9LqxMoWMsQnXNP6OFBJv3Z10b4eVXuOS2E809GafezgIzu-MiL5LF-qfI33NwKJtNUzswoKyKuZDokNbqOPdC2GRBfDXq1xIoKa6Bdm6Gj9ekTKsRc-M3rmk2jnLAU1BQRadBh1CboyMk15mmN6doSAJDtMXNObVCSzdZypYDeWriSdue594SLK81fpmpv5qTPsm0Txan-pbdu-j1dTPQ"/>
+</div>
+<div>
+<p class="font-headline-md text-base leading-tight">Organic Grain-Free Salmon</p>
+<p class="text-xs text-secondary mt-0.5">SKU: DG-SL-102</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary font-body-md">Dog Food</td>
+<td class="px-6 py-4 font-label-lg">$64.99</td>
+<td class="px-6 py-4 text-center font-body-md">124</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-primary-container/10 text-primary">In Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-secondary hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-secondary hover:text-error hover:bg-error-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-subtle/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern glass aquarium with minimalist black framing. The water is crystal clear, containing vibrant green aquatic plants and a single colorful Siamese fighting fish. The lighting is ethereal and focused, highlighting the clean lines of the tank against a minimalist dark gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_NNkl-dBiVlKxLuKVNcPAw1xcjxsbqXEjVa_Cza4V2jDKhqWFFLCUH6XRqxq-qrP1WNA0NPaR78MBT0Qpe1dBrJ6l6kDYycpHNYz5wXctHpFc6lM5eHvHw9NT6cy0JsYy1Y1p9AcqrzFo5yekcB2-cePxww0nhoENb3OAhWEDZsnm5if-mXmYzPVPGbMLEfff7iHCyVUm0Hi4heda8Eik396Nyl4QDCF1AIilNkQ_pPBft10QaUlstxMifX_jfkZgWLKfJw47_i8"/>
+</div>
+<div>
+<p class="font-headline-md text-base leading-tight">ZenScape 5-Gallon Tank</p>
+<p class="text-xs text-secondary mt-0.5">SKU: AQ-ZS-440</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary font-body-md">Aquarium</td>
+<td class="px-6 py-4 font-label-lg">$129.00</td>
+<td class="px-6 py-4 text-center font-body-md">18</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-orange-100 text-orange-600">Low Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-secondary hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-secondary hover:text-error hover:bg-error-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-subtle/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover" data-alt="A high-end, contemporary cat climbing tower made from light natural wood and soft white felt. The design is architectural and sculptural, fitting perfectly into a minimalist luxury home. The setting is an airy living room with large windows and a peaceful, serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE4NbRmKqcqJ8I3xHJ4GiqgmflrPP4Zlzc4KShX77e8mEPAuSdIcoW5vOjMVOZ5pg5nnZ60C9dH6WtGS_ajofgfFfARH-YGFbnR41-Ld7IqhRFE1l4aDznQIz4quoED_8QyW3fG8RrKjKnJosnXF-qYwXoGElpf4YQZEC9ktrEcc2_lZVAMHsaiMLilqK0uk1QWl3IsWHt71VhYp6MbRGLHqhRAbPPQOuAwuKmMPB7SgdMoJsNUAmQVucJS5R2G5qRqdvI7Bm1zW0"/>
+</div>
+<div>
+<p class="font-headline-md text-base leading-tight">Nordic Wood Cat Tower</p>
+<p class="text-xs text-secondary mt-0.5">SKU: CT-NW-801</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary font-body-md">Cat Supplies</td>
+<td class="px-6 py-4 font-label-lg">$245.00</td>
+<td class="px-6 py-4 text-center font-body-md">0</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-error-container/10 text-error">Out of Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-secondary hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-secondary hover:text-error hover:bg-error-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-subtle/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden flex-shrink-0 border border-border-light">
+<img class="w-full h-full object-cover" data-alt="A designer leather pet collar with polished brass hardware. The leather is a deep mahogany color with refined stitching. The collar is presented on a textured cream linen fabric, suggesting an editorial-grade, boutique accessory for discerning pet owners. The lighting is warm and directional, emphasizing the quality of the materials." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVB7a86RYsRuPntgb0k7S-5JHyyi9KX0p1QsHE6VE-tLqp1JID--gEaSr8lOiADd-eZgmQ_LMpiL2klCaci-Wbn3agLdFr7ueRlFMZkPzpxIBWXoUVLA0Uut6pHozCCE2h5h_sJ6Ev3gOUFBqMS1KnAY5HduHPRzMdnMwyf_DWOaDx5Dm8SzN_2LTjCPsB_XxMAsWQwMI3j1qO_bMT-BauqC4EcrtnVR2QTNtC_49L7H0NH-p-AYBRhM-tYPOWtn3zYwxqB4zmY_Q"/>
+</div>
+<div>
+<p class="font-headline-md text-base leading-tight">Heritage Leather Collar</p>
+<p class="text-xs text-secondary mt-0.5">SKU: DG-CL-215</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-secondary font-body-md">Dog Supplies</td>
+<td class="px-6 py-4 font-label-lg">$45.00</td>
+<td class="px-6 py-4 text-center font-body-md">56</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-primary-container/10 text-primary">In Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-secondary hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-secondary hover:text-error hover:bg-error-container/10 rounded-lg transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 border-t border-border-light flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-subtle/20">
+<p class="text-label-sm text-secondary">Showing <span class="font-bold text-on-surface">1 - 4</span> of <span class="font-bold text-on-surface">42</span> products</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-white transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-label-lg shadow-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-white font-label-lg transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-white font-label-lg transition-all">3</button>
+<span class="px-2 text-secondary">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-white font-label-lg transition-all">11</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light hover:bg-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dashboard Stats Summary (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+<div class="bg-white p-6 rounded-2xl border border-border-light shadow-sm">
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-2">Total Products</p>
+<div class="flex items-end gap-2">
+<span class="text-headline-lg font-headline-lg">1,284</span>
+<span class="text-primary text-label-sm font-bold mb-1.5">+12%</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-border-light shadow-sm">
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-2">Low Stock Items</p>
+<div class="flex items-end gap-2">
+<span class="text-headline-lg font-headline-lg">24</span>
+<span class="text-orange-600 text-label-sm font-bold mb-1.5">-5%</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-border-light shadow-sm">
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-2">Categories</p>
+<div class="flex items-end gap-2">
+<span class="text-headline-lg font-headline-lg">18</span>
+<span class="text-secondary text-label-sm font-bold mb-1.5">No Change</span>
+</div>
+</div>
+<div class="bg-primary p-6 rounded-2xl border border-primary-fixed shadow-md relative overflow-hidden">
+<!-- Subtle pattern -->
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-[64px] text-white">trending_up</span>
+</div>
+<p class="text-label-sm text-white/80 uppercase tracking-wider mb-2">Monthly Sales</p>
+<div class="flex items-end gap-2">
+<span class="text-headline-lg font-headline-lg text-white">$42,850</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Script for interactive elements -->
+<script>
+        // Simple search highlighting simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const value = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if (text.includes(value)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Dropdown interaction (visual only for now)
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Subtle feedback
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 100);
+            });
+        });
+    </script>
+</body></html>

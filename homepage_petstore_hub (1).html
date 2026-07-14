@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PetStore Hub | Editorial-Grade Pet Supplies</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 sticky z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">PetStore Hub</div>
+<nav class="hidden md:flex items-center gap-8 font-body-md text-body-md">
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary dark:border-primary-fixed-dim pb-1" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Shop</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Categories</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">About</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-subtle px-4 py-2 rounded-full border border-border-light">
+<span class="material-symbols-outlined text-secondary mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-lg w-48" placeholder="Search premium pet gear..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-primary hover:scale-105 transition-transform duration-200" data-icon="shopping_cart">shopping_cart</button>
+<button class="md:hidden material-symbols-outlined text-primary">menu</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative w-full h-[600px] overflow-hidden flex items-center px-margin-desktop bg-surface-container-low">
+<div class="z-10 max-w-2xl">
+<span class="text-primary font-label-lg tracking-widest bg-primary/10 px-4 py-1 rounded-full mb-6 inline-block">PREMIUM CURATION</span>
+<h1 class="font-display text-display text-on-surface mb-6">Everything for your <br/><span class="text-primary italic">beloved pets</span>.</h1>
+<p class="text-body-lg text-secondary mb-10 max-w-lg">Discover an editorial-grade collection of pet supplies designed for the discerning owner who values quality, transparency, and style.</p>
+<div class="flex gap-4">
+<button class="bg-primary hover:bg-on-primary-fixed-variant text-white px-8 py-4 rounded-xl font-label-lg transition-all duration-300 transform hover:scale-[1.02] shadow-lg">Shop Collection</button>
+<button class="bg-white border border-border-light text-on-surface px-8 py-4 rounded-xl font-label-lg transition-all duration-300 hover:bg-surface-subtle">Learn More</button>
+</div>
+</div>
+<!-- Hero Decorative Image -->
+<div class="absolute right-0 top-0 w-1/2 h-full hidden lg:block">
+<div class="w-full h-full bg-cover bg-center rounded-l-[80px]" data-alt="A high-end, studio-lit portrait of a noble Golden Retriever and a sleek Siamese cat sitting harmoniously together. The background is a soft, minimalist warm beige with elegant architectural shadows. The lighting is diffused and editorial, highlighting the texture of their fur and creating a luxurious, calm atmosphere that matches a premium brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5uYGOStypKu65qeHgohTwWezKByN9OtMAjnDxAsCnP0IhRsCJ5r5Bj5Pxvn_bg-ri89myGBjoHqYGR_Jk0AY6bxdi7VNvtUf8P4o7DjqAcoytqAy2EvFJDExmxKTxXEDyzI5dDwjzJsdAK0sLkBupN2rlWkXPNfAhqNiz2Hrm7anqvZsYK3YT7M8qcaOX69krTbCWJlwPDKvQYVIiIv04KflDo1MbX-m8BwB-sp8fJ5gHB_hKZjplJrTCusCZLP0CuO5EwbUanQs')"></div>
+</div>
+</section>
+<!-- Popular Categories - Bento Grid -->
+<section class="py-24 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Explore Categories</h2>
+<p class="text-secondary mt-2">Curated essentials for every species.</p>
+</div>
+<button class="text-primary font-label-lg flex items-center gap-2 hover:gap-3 transition-all">View All <span class="material-symbols-outlined">arrow_forward</span></button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter h-[500px]">
+<div class="md:col-span-2 relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A close-up artistic shot of a Border Collie catching a high-quality rubber frisbee in a lush green meadow. The sunlight filters through autumn leaves, creating a golden, airy aesthetic. The image focus is sharp on the dog's joyful expression, emphasizing an active and high-quality pet lifestyle within a nature-inspired palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOeAx_XXUIwFQ6_tGUkahtUCuLseVNALVe_bLnae4939SyaJiRLRG0jkC66PEeFuVj_EqnCpqIXuLpzZcjnfXbP2cHw3pZfsVc0aYl4SYKdgcN4TgsBNCB4M0EVZ2yD7LXt1qW48Us6UJfq3g5_QyYr7Rd5MLv6RVhzs4HMZOU7uqrwknJzptY56MTksgwMVehahRf7MZKMmv8C_8QbIhk18M0Zsdhclbx_X7MGBvPX1xRIEdRppI22novwF64MnhRmw3vQpkTW3E')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<h3 class="text-white font-headline-md text-headline-md">Dogs</h3>
+<p class="text-white/80 text-label-lg">Premium gear for your best friend</p>
+</div>
+</div>
+<div class="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A sophisticated indoor scene featuring a British Shorthair cat lounging on a designer velvet cat tree. The room is modern with minimalist furniture and soft, ambient lighting. The color palette is composed of muted teals and soft greys, evoking a sense of calm luxury and high-end feline care." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1e1eUEsePwjkJvdTeUASaHwC1z0JK5rYzfMtXRxUvXtHozSoX0cq05nkW2jg--pH9qZiqfWEq03uA4zZJPHjSsLtTqFsaGbbw6HJA2z3LpLrVKQOHwvMyju4sGAbeTVGj2BM7bb29AZmFuDeM08ts0TQ4WEn0ii0A_d9OCM4Y6zdVHk5FwFi6IjdPKOSRBjY5JulbpFBiV8_AucgXsO9IRRGlSnyqAn7nUoDv0YBlvLawtWExl8-AMJVmxuZ1BkeFTZJ1TmRW9wk')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h3 class="text-white font-headline-md text-headline-md">Cats</h3>
+</div>
+</div>
+<div class="grid grid-rows-2 gap-gutter h-full">
+<div class="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A vibrant, close-up image of a colorful Macaw parrot perched on a natural wood branch. The background is a soft-focus tropical greenery. The lighting is bright and crisp, highlighting the iridescent feathers and promoting a specialized, high-end care aesthetic for exotic birds." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBvzj6Ph0l--vY3ItVqZl5whpQXUuei6mzwo_LsxKW9WbFF_naH4k1IGOZ8PrUZxdAWwphmh67f1HHx5K3rB-CSGbpLf8Q8SR0HV48xnjyZCr-VfhtjbCRIdXIxDiFPcq552iYtKrgARe1mmdXW1QmXsZnbOgSmOn0CbYbw6QcAUNzuU44cEWuyNhmIo3cYoVeCpVNo7W9hEiI2yWa-TJyolZGsmrPiaRuxkHn_W95LGpCo0DxH2JlmvUDyBoYSMZ4v2JboY3JAt-E')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-white font-label-lg">Birds</h3>
+</div>
+</div>
+<div class="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A serene underwater scene of a minimalist, high-end aquascape aquarium with neon tetras swimming through vibrant green aquatic plants. The water is crystal clear, and the lighting is a cool, clean blue-white, reflecting a sense of peace and professional-grade aquatic husbandry." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD9YTDzg1PchkTIhKhTHxuJcb5GLpAJ9xbqjjwE0vsJrugOvPGQi00ujH4uoalOWlKR4gvlMbAB1ucyAMf-aY6eIWmqIRyrvnr6Y6KMNaDC4Rgks7vVzPYJOxdjGPKV3XTrWgRfzf0bdsKUK3uhp1Hly3VJmQnk-a0DwUBUZq6qOXbiQQpoppJJHT9JbIc6YQhtLf3IxlgsKkFwHbQftKFmkF6DYK67xEHo6gYf5dqVJwp4YhOUZY-lXVOBPKB66RLhyHwwRl8Icrc')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-white font-label-lg">Fish</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Pet Food - Product Grid -->
+<section class="bg-white py-24 px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pure Nutrition</h2>
+<p class="text-secondary mt-4 text-body-lg">Clean-label, editorial-grade nourishment sourced from the finest ingredients for optimal pet health.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product Card 1 -->
+<div class="group">
+<div class="aspect-[4/5] relative bg-surface-subtle rounded-3xl overflow-hidden mb-6 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Product photography of a minimalist, designer pet food bag with clean typography. The bag is placed on a white marble surface with fresh rosemary and a wooden scoop of organic kibble beside it. High-key studio lighting with soft shadows, creating a healthy, premium organic brand image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM-N73pCkUhUyRM_6tAolvYzebyHUblrX8FIkpPWmXKTuKr9dcRlUuMwfYztCClMghYRmsWl3r0qO1vPrkuwMNSzrng8V8y33fqdJ4-gSW2FJkCo5vIwMWi2Hoc_oAHIfJ1V_bfbGmXUxAyJ2Ao8IyXKS4HvHg-56LLkZ6lqxdp9r1N7aXsdzfDYQLn-ZdxIbyzp8yBL7yrZ0oo6qc9ls6DCU8nnMLEySN3UEmO_jTuI9q18dPu0sETFs-OMtIm9-ndb2R3iB0-ZM"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-white text-label-sm px-3 py-1 rounded-full">BEST SELLER</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-md opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<span class="text-label-sm text-primary uppercase tracking-widest">Organic Canine</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-2">Wild Salmon &amp; Peas</h3>
+<div class="flex items-center justify-between mt-4">
+<span class="text-headline-md text-primary">$48.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-lg text-on-surface">4.9</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group">
+<div class="aspect-[4/5] relative bg-surface-subtle rounded-3xl overflow-hidden mb-6 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A premium bag of cat food featuring a minimalist illustration of a cat. The background is a clean, modern kitchen with soft morning light. Next to the bag is a glass bowl filled with rich, textured wet food and pieces of real tuna. The aesthetic is sophisticated, trustworthy, and high-end." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button class="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-md opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<span class="text-label-sm text-primary uppercase tracking-widest">Gourmet Feline</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-2">Pacific Blue Tuna</h3>
+<div class="flex items-center justify-between mt-4">
+<span class="text-headline-md text-primary">$32.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-lg text-on-surface">4.8</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group">
+<div class="aspect-[4/5] relative bg-surface-subtle rounded-3xl overflow-hidden mb-6 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An elegant cardboard container for premium bird seed, standing on a rustic wooden table with small clay pots of wheatgrass nearby. Soft sunlight from a window creates a natural, wholesome environment. The design emphasizes high-quality ingredients for garden and companion birds in a modern, eco-friendly way." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY0rqTjX5f8vNR2wZTP5y9pdNxfei7qGLnTqJLQR77_z3A34Z4378-fzdflC9c0edil7coDeZqZ0qN4ANf19lF2esiA3nXA1b5iAhZephf32r5e5K-08Zpju0Qc58V6fBxwkNDm8osSei29FWyZ4RiDUH_qIVxkXGJusYJvus0Sy5NBuFGX7PoFy-j2kg84zf6fJJ0NzISGDsLkq2C3dvEplthLftAd0Yws-WLBDT7J67FwpxOKFk8Jtm_oZA0ouhll68rryoC9QM"/>
+<div class="absolute top-4 left-4">
+<span class="bg-on-tertiary-container text-white text-label-sm px-3 py-1 rounded-full">NEW</span>
+</div>
+<button class="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-md opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<span class="text-label-sm text-primary uppercase tracking-widest">Exotic Avian</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-2">Rainforest Seed Mix</h3>
+<div class="flex items-center justify-between mt-4">
+<span class="text-headline-md text-primary">$24.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-lg text-on-surface">5.0</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group">
+<div class="aspect-[4/5] relative bg-surface-subtle rounded-3xl overflow-hidden mb-6 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek black container of specialized aquatic pellets, styled with polished river stones and a minimalist glass vase of water lilies. The background is a clean charcoal grey with professional spot lighting, creating an atmosphere of expertise and premium care for refined aquarium enthusiasts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiaIKx__ZIlGzgwoKlyUo-CxaQEkIB47wHPcqEQNCEMYfcBqsnSV3uDhg64rg-MO_rlbaiHe6XwcqeBczcRK_yh5b25iRk-V4ApZBvj02zxOPDe8vQVwjHfmS8t0mG3p4ANNB-3ErTk-6ZgIJ9sQvrz_JIWeK8HPM0H-CYbgFx-vC2Oe6WNBgnW8ob-qWCnc5_tdqOW1SskmhurspL2XJqdnKcVrli59t0rd-ciw25o-_jdBFGmhLumN4ftuLSD9ckfiHmgpEUOZg"/>
+<button class="absolute bottom-4 right-4 bg-white p-3 rounded-xl shadow-md opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">
+<span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+</button>
+</div>
+<span class="text-label-sm text-primary uppercase tracking-widest">Aqua Flora</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-2">Crystal Pond Pellets</h3>
+<div class="flex items-center justify-between mt-4">
+<span class="text-headline-md text-primary">$19.00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-lg text-on-surface">4.7</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-24 px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto bg-primary rounded-[48px] p-12 md:p-24 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
+<!-- Background Decorative Pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<svg height="100%" preserveaspectratio="none" viewbox="0 0 100 100" width="100%">
+<pattern height="10" id="grid" patternunits="userSpaceOnUse" width="10">
+<path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"></path>
+</pattern>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<div class="relative z-10 max-w-xl text-center md:text-left">
+<h2 class="font-headline-lg text-white text-[40px] leading-tight mb-6">Join the <span class="italic font-normal">PetStore</span> Inner Circle.</h2>
+<p class="text-white/80 text-body-lg">Get editorial pet care tips, exclusive early access to drops, and 10% off your first premium order.</p>
+</div>
+<div class="relative z-10 w-full max-w-md">
+<form class="flex flex-col sm:flex-row gap-4">
+<input class="flex-1 px-8 py-5 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:bg-white/20 focus:outline-none focus:ring-2 focus:ring-primary-fixed-dim transition-all" placeholder="Email Address" type="email"/>
+<button class="bg-white text-primary px-8 py-5 rounded-2xl font-label-lg hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors shadow-xl" type="submit">Subscribe</button>
+</form>
+<p class="text-white/40 text-label-sm mt-4 text-center md:text-left">We respect your privacy. No spam, ever.</p>
+</div>
+</div>
+</section>
+<!-- Best Sellers - Horizontal Scroll Section -->
+<section class="py-24 overflow-hidden">
+<div class="px-margin-desktop max-w-container-max mx-auto mb-12 flex justify-between items-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Community Favorites</h2>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full border border-border-light flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-border-light flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-8 overflow-x-auto px-margin-desktop pb-8 scrollbar-hide no-scrollbar">
+<!-- Best Seller Item 1 -->
+<div class="min-w-[300px] group cursor-pointer">
+<div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-surface-container shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" data-alt="A minimalist, modern leather pet collar and matching leash set displayed on a grey felt background. The hardware is a matte brushed brass. The setting is bright and clean, emphasizing high-end design, luxury materials, and sophisticated pet fashion for discerning owners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQafiCtt14Z98SPfRzdXIQCrEtIc0O0lsA1_ZwzHzyFFmTR8AZMHMJXOZjlzk0K0Gl5rn5WP4UMyLeCqIBs-lQjbpnHjssVBA40ZJJhPP2HeLlJCB8pcPViqNmsZZ74u8x4gzpFYsyfeOFc4qkNCwsZyrvy2-_Kusmo9_fBV7s8UsdroabUIR00CXpBufrYYVuutUyIuJPpLKOvETTJkLvwijbh2xVL_AE1WXoB4OpVyFMNGxu1mQAtIn7iYJaT3M5WfUaK_7rByI"/>
+</div>
+<h4 class="font-headline-md text-on-surface">Nappa Leather Collar</h4>
+<p class="text-primary font-label-lg mt-1">$65.00</p>
+</div>
+<!-- Best Seller Item 2 -->
+<div class="min-w-[300px] group cursor-pointer">
+<div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-surface-container shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" data-alt="A designer ceramic pet bowl with a unique speckled glaze and a raised wooden stand. Beside it is a small glass pitcher of water. The scene is set on a light oak kitchen counter with soft morning sunlight creating long, elegant shadows. The aesthetic is extremely modern, minimalist, and high-end." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAXY06ntN9GaTL9tIf3PMgWtKp23S9FDkXr3OoNqiwBqJMsuulMyQt6m0MjaTxG-aQN_AiFz-0IQTbiGWjDSxRMkIihXeq1dyLCdeJa1uFdNcvoONOmrw5kCw1OZ7T7HDqD4NpVhgcM1G6NzN3YkKq8FGHClIRb1CINlegccDP5Psil_VvybEbqH0tQ_G2CslXXpCDLKstMjR_62iGxkgtUjI-e0xYp9RtLYvpHEtM3Xu7n4nsGocJqgW4UdmuXjaan3gjhBG2Lck"/>
+</div>
+<h4 class="font-headline-md text-on-surface">Speckled Ceramic Bowl</h4>
+<p class="text-primary font-label-lg mt-1">$38.00</p>
+</div>
+<!-- Best Seller Item 3 -->
+<div class="min-w-[300px] group cursor-pointer">
+<div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-surface-container shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" data-alt="A luxury orthopedic pet bed with a textured grey fabric and a minimalist shape, placed in the corner of a modern sunlit living room. A fluffy white dog is sleeping peacefully on it. The image conveys ultimate comfort, premium quality, and a seamless integration of pet products into high-end interior design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3WXRqKG6T_Y-FiShsPc5F8RPoRNlFHL1_qWqWSiGmjdNISOMZEE6NUp2Q7QN9aXUbQXZmBke3KgXWTY_XOJXJtQEdx9Sl8Z2UK7OaltT3tI9ezmkFmpqFxMFnjkMKhzb2UPoRgXY640MODo96dgU_Pc__7wSXBbQtcJiPoimTMG8Fxzg2clWf2MBl9PwxLHbbd8aywKARELPUkljtaU_JREKQQrHV4AS_MMh55xx9c_cPLNZ8Oe_KyHs13XWUyhpo0tAptfWX92E"/>
+</div>
+<h4 class="font-headline-md text-on-surface">Cloud-Support Bed</h4>
+<p class="text-primary font-label-lg mt-1">$120.00</p>
+</div>
+<!-- Best Seller Item 4 -->
+<div class="min-w-[300px] group cursor-pointer">
+<div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-surface-container shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" data-alt="A curated set of organic cotton pet toys in neutral, earthy tones—a bone, a rope, and a soft ball. They are arranged artfully on a light linen surface. The photography is soft and natural, emphasizing eco-friendly materials and high-quality play for stylish pets." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSjHtOV5d_8tzTvmW6w2V0LLHQkw6dvomN_Q4SmF6ficDdHNeNB9zIa3GzXHDkbU6E5TBNviJiF5nwg_B5Z_uJTf_5S1LfniUx4uiwWxiWZ2gFhroR-y7dVCBv4nYWfEVFe6iUOMjqkT7d66HRKqkr6iahwZGxK5W8_pvRBjPhdtA6y9p1kacScscpzExrBL6Qzf9Av81lhzg7jwAJz8rBmbrYkEqFVSq744sODEcauAYCivmZKM--82v7eiUSr1X9Ld6OJqZnR-w"/>
+</div>
+<h4 class="font-headline-md text-on-surface">Organic Cotton Toy Set</h4>
+<p class="text-primary font-label-lg mt-1">$29.00</p>
+</div>
+<!-- Best Seller Item 5 -->
+<div class="min-w-[300px] group cursor-pointer">
+<div class="aspect-square rounded-3xl overflow-hidden mb-4 bg-surface-container shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<img class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105" data-alt="A minimalist glass bottle of premium pet grooming shampoo with a clean, typography-heavy label. Beside it is a soft white towel and a wooden brush. The lighting is bright and clean, suggesting a professional-grade spa experience for pets at home using high-quality botanical ingredients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBekRtYqfFalr5NoutH4itg1n8ccYX900VFvF50pRkUnugmcG9zGAjXSn9qNe0Gxr6HCZDSUHhq7YK3Gn2CFzsIP3eiZBXf3SAuFgiNXm2GuvJ6uhikqh0x_4DJVLU8O9aExJ7RMZWJjA1jp-8xqFdoVBgqRyLp1k0G82q2WAqakdiVyHMt_TLk-17FxpWlC09M8S0yZICVeBeJgm53s8JWFjGswBQrgpYf_a5BaxV4CBWG_4ebplzajjl5uNworSAnlLRqlHrEirg"/>
+</div>
+<h4 class="font-headline-md text-on-surface">Botanical Spa Shampoo</h4>
+<p class="text-primary font-label-lg mt-1">$24.00</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest border-t border-border-light dark:border-outline-variant full-width">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-gutter px-margin-desktop py-20 max-w-container-max mx-auto">
+<div class="col-span-2 lg:col-span-1">
+<div class="text-headline-md font-headline-md text-primary mb-6">PetStore Hub</div>
+<p class="text-secondary mb-8">© 2024 PetStore Hub. Editorial-grade pet supplies.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined">face_nod</span></a>
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined">camera</span></a>
+<a class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-6">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Our Story</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Find a Store</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Wholesale</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-6">Categories</h4>
+<ul class="space-y-4">
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Dog Essentials</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Cat Luxury</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Avian Care</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Aqua Life</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-6">Policies</h4>
+<ul class="space-y-4">
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-secondary hover:text-primary transition-colors" href="#">Terms of Service</a></li></ul></div></div></footer></body></html>

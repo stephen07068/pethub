@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Crypto Checkout - PetStore Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .crypto-card-selected {
+            border-color: #22c55e;
+            background-color: #eff4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(31, 41, 55, 0.08);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar (Immutable Content & Mandatory Styling) -->
+<nav class="bg-surface docked full-width top-0 sticky z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary">PetStore Hub</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Home</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Shop</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Categories</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">About</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:scale-105 transition-transform duration-200">shopping_cart</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow flex items-center justify-center py-12 px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<!-- Ambient Background Decoration -->
+<div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10"></div>
+<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-tertiary/5 rounded-full blur-[100px] -z-10"></div>
+<div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Crypto Selection & Details -->
+<div class="lg:col-span-7 space-y-8">
+<div class="space-y-2">
+<h1 class="font-headline-lg text-headline-lg text-on-background">Complete Payment</h1>
+<p class="text-secondary font-body-md">Choose your preferred cryptocurrency to finalize your order.</p>
+</div>
+<!-- Currency Selector Bento -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="currency-grid">
+<button class="crypto-card-selected flex flex-col items-center justify-center p-6 bg-white border border-border-light rounded-xl transition-all duration-300 hover:brightness-105 group" data-currency="btc" onclick="selectCurrency('btc')">
+<div class="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-full mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-orange-600">currency_bitcoin</span>
+</div>
+<span class="font-label-lg text-label-lg">Bitcoin</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-white border border-border-light rounded-xl transition-all duration-300 hover:brightness-105 group" data-currency="eth" onclick="selectCurrency('eth')">
+<div class="w-12 h-12 flex items-center justify-center bg-indigo-100 rounded-full mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-indigo-600">atm</span>
+</div>
+<span class="font-label-lg text-label-lg">Ethereum</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-white border border-border-light rounded-xl transition-all duration-300 hover:brightness-105 group" data-currency="usdt_trc20" onclick="selectCurrency('usdt_trc20')">
+<div class="w-12 h-12 flex items-center justify-center bg-teal-100 rounded-full mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-teal-600">universal_currency</span>
+</div>
+<span class="font-label-lg text-label-lg text-center">USDT (TRC20)</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-white border border-border-light rounded-xl transition-all duration-300 hover:brightness-105 group" data-currency="usdt_bep20" onclick="selectCurrency('usdt_bep20')">
+<div class="w-12 h-12 flex items-center justify-center bg-yellow-100 rounded-full mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-yellow-600">universal_currency</span>
+</div>
+<span class="font-label-lg text-label-lg text-center">USDT (BEP20)</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-white border border-border-light rounded-xl transition-all duration-300 hover:brightness-105 group" data-currency="sol" onclick="selectCurrency('sol')">
+<div class="w-12 h-12 flex items-center justify-center bg-purple-100 rounded-full mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-purple-600">token</span>
+</div>
+<span class="font-label-lg text-label-lg">Solana</span>
+</button>
+</div>
+<!-- Transaction Details Panel -->
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light p-8 space-y-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-5">
+<span class="material-symbols-outlined text-9xl">shield_locked</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<label class="text-label-sm uppercase tracking-wider text-secondary mb-1 block">Amount to Pay</label>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-primary" id="payment-amount">0.0042</span>
+<span class="font-headline-md text-headline-md text-secondary" id="payment-symbol">BTC</span>
+</div>
+<p class="text-label-sm text-secondary">Approx. $284.50 USD</p>
+</div>
+<div class="pt-4 border-t border-border-light">
+<label class="text-label-sm uppercase tracking-wider text-secondary mb-2 block">Wallet Address</label>
+<div class="flex items-center gap-3 bg-surface-subtle p-3 rounded-lg border border-border-light">
+<span class="font-mono text-sm truncate text-on-surface" id="wallet-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</span>
+<button class="p-2 hover:bg-white rounded transition-colors text-primary" onclick="copyToClipboard()" title="Copy Address">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center gap-4">
+<div class="relative group p-4 bg-white border border-border-light rounded-2xl shadow-sm">
+<div class="w-48 h-48 bg-surface-subtle rounded-lg flex items-center justify-center relative">
+<div class="w-full h-full bg-cover rounded-md opacity-90 group-hover:opacity-100 transition-opacity" data-alt="A clean, high-resolution QR code rendered in a minimalist style. The QR code is perfectly centered in a white frame with soft corners. The aesthetic is modern and professional, following a lush and lucid theme with high-key lighting and a sense of cryptographic security." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBWv8A09zlJBqKFj6NwIlpzIqXHxN5q76Tv_uD9WKCI-G2n7PpftEZUm1aaIznWUPgSmFCJj2cnlfxrMh-wKNnHfy2oN7mek1cfdgTs_aYfckBRRa8Vx5tGhqYuZ7zh300iqhzoEZ8YiFEiuzyZMk_myU9EJG5-sbCHVg9d8JG0qyTUUpwIApIxztpEBcKez_Mro8XXw3_zFi5TEHaZQ22P675FCZR6yVokCTmM_Z7CMFCWGiq0O_TaIGeVZVbxHLMYrE1oOSVR6SU')"></div>
+<div class="absolute inset-0 shimmer pointer-events-none opacity-50"></div>
+</div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap shadow-md">
+                                    Scan to Pay
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Verification & Summary -->
+<div class="lg:col-span-5 space-y-6">
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light p-8">
+<h3 class="font-headline-md text-headline-md mb-6">Payment Verification</h3>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-label-lg font-label-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">key</span>
+                                Transaction Hash
+                            </label>
+<input class="w-full h-[48px] px-4 rounded-xl bg-white border border-border-light focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none font-body-md" placeholder="Enter transaction ID (TXID)" type="text"/>
+<p class="text-label-sm text-secondary">Paste your transaction hash here after making the payment to speed up verification.</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border border-primary/10">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<div class="space-y-1">
+<p class="text-label-lg text-on-primary-container">Estimated Time</p>
+<p class="text-body-md text-secondary">Most <span id="current-chain">Bitcoin</span> payments are confirmed within 10-30 minutes.</p>
+</div>
+</div>
+</div>
+<div class="space-y-3 pt-4 border-t border-border-light">
+<div class="flex justify-between text-body-md">
+<span class="text-secondary">Subtotal</span>
+<span>$264.50</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-secondary">Shipping</span>
+<span>$20.00</span>
+</div>
+<div class="flex justify-between font-bold text-lg pt-2">
+<span>Order Total</span>
+<span class="text-primary">$284.50</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:brightness-110 text-white font-label-lg py-4 rounded-xl transition-all transform active:scale-[0.98] shadow-sm flex items-center justify-center gap-2">
+                            Verify &amp; Continue
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="w-full text-secondary hover:text-on-surface font-label-lg py-2 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">cancel</span>
+                            Cancel Payment
+                        </button>
+</div>
+</div>
+<!-- Trust Badges -->
+<div class="flex items-center justify-center gap-6 grayscale opacity-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+<span class="text-label-sm font-semibold">SECURE</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">encrypted</span>
+<span class="text-label-sm font-semibold">ENCRYPTED</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">speed</span>
+<span class="text-label-sm font-semibold">FAST SYNC</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Immutable Content & Mandatory Styling) -->
+<footer class="bg-surface-container full-width border-t border-border-light mt-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-gutter px-margin-desktop py-12 max-w-container-max mx-auto">
+<div class="col-span-2 lg:col-span-1">
+<div class="text-headline-md font-headline-md text-primary mb-4">PetStore Hub</div>
+<p class="text-secondary text-body-md mb-4">© 2024 PetStore Hub. Editorial-grade pet supplies.</p>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-4">Quick Links</h4>
+<ul class="space-y-2 text-secondary">
+<li><a class="hover:text-primary transition-colors" href="#">Home</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Shop</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Track Order</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-4">Categories</h4>
+<ul class="space-y-2 text-secondary">
+<li><a class="hover:text-primary transition-colors" href="#">Dogs</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cats</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Small Pets</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-4">Policies</h4>
+<ul class="space-y-2 text-secondary">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Crypto FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-4">Newsletter</h4>
+<div class="flex gap-2">
+<input class="w-full bg-white border border-border-light rounded-lg px-3 py-2 text-sm outline-none focus:border-primary" placeholder="Your email" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        const currencyData = {
+            'btc': { symbol: 'BTC', amount: '0.0042', chain: 'Bitcoin', address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh' },
+            'eth': { symbol: 'ETH', amount: '0.082', chain: 'Ethereum', address: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F' },
+            'usdt_trc20': { symbol: 'USDT', amount: '284.50', chain: 'TRON', address: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' },
+            'usdt_bep20': { symbol: 'USDT', amount: '284.50', chain: 'BNB Smart Chain', address: '0x55d398326f99059fF775485246999027B3197955' },
+            'sol': { symbol: 'SOL', amount: '1.95', chain: 'Solana', address: '6p6xgHyY7vXp6x6TpwC8A8A8A8A8A8A8A8A8A8A8A' }
+        };
+
+        function selectCurrency(currency) {
+            const data = currencyData[currency];
+            
+            // UI Updates
+            document.getElementById('payment-amount').textContent = data.amount;
+            document.getElementById('payment-symbol').textContent = data.symbol;
+            document.getElementById('wallet-address').textContent = data.address;
+            document.getElementById('current-chain').textContent = data.chain;
+
+            // Manage Selected State
+            const buttons = document.querySelectorAll('#currency-grid button');
+            buttons.forEach(btn => {
+                if(btn.getAttribute('data-currency') === currency) {
+                    btn.classList.add('crypto-card-selected');
+                } else {
+                    btn.classList.remove('crypto-card-selected');
+                }
+            });
+        }
+
+        function copyToClipboard() {
+            const address = document.getElementById('wallet-address').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                const btn = event.currentTarget;
+                const icon = btn.querySelector('.material-symbols-outlined');
+                icon.textContent = 'check';
+                icon.classList.add('text-primary');
+                setTimeout(() => {
+                    icon.textContent = 'content_copy';
+                    icon.classList.remove('text-primary');
+                }, 2000);
+            });
+        }
+
+        // Initialize with BTC
+        window.onload = () => selectCurrency('btc');
+    </script>
+</body></html>

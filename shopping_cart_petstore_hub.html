@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart | PetStore Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            color: #121c2a;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-shadow {
+            box-shadow: 0px 4px 20px rgba(31, 41, 55, 0.04);
+        }
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 10px 30px rgba(31, 41, 55, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- TopNavBar -->
+<header class="bg-surface docked full-width top-0 sticky z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary">PetStore Hub</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Home</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Shop</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Categories</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">About</a>
+<a class="text-secondary hover:text-primary transition-colors font-body-md text-body-md" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<input class="h-[40px] pl-10 pr-4 rounded-xl border border-border-light bg-white focus:outline-none focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all w-64" placeholder="Search products..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+</div>
+<button class="relative hover:scale-105 transition-transform duration-200">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">3</span>
+</button>
+<button class="md:hidden">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-12">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-8 text-label-sm text-secondary">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-semibold">Shopping Cart</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg mb-10">Your Cart (3 items)</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Product List Section -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Item 1 -->
+<div class="bg-white rounded-xl p-6 custom-shadow border border-transparent hover:border-border-light transition-all flex flex-col sm:flex-row gap-6">
+<div class="w-full sm:w-32 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-surface-subtle">
+<img class="w-full h-full object-cover" data-alt="A professional studio product photograph of a premium, eco-friendly wooden cat tree with soft cream-colored wool padding. The lighting is soft and natural, emphasizing the organic texture of the wood and the plushness of the fabric. The overall aesthetic is minimalist and high-end, fitting a luxurious pet lifestyle brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRaoqUEEFb18Idb3X3oxaZWQKJoudTDX0Kn0Yvlu5VBCn29o4E9_ZPaAdSnfyG2zyVUJKxpaTOI8s3ZKYQVIExS6DSvrjp5JN71u78vXc7ZFjHkNnIA9DReGFRIYRp7vqqTA7zw8bAsmtx4c6vTw9ftCOREB_seajyEjxrQPghcDlb4JIs8UBfDJiy_OV3PgXNurc9AckgiJ1eHmFWEMhYPMx_vJfL4azivnM44mdl0LHWE81e7jRNnGMWvyabhKC_Ui4ITmwWvGo"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-sm text-primary uppercase font-bold tracking-wider mb-1 block">Luxury Living</span>
+<h3 class="font-headline-md text-headline-md text-on-background">Eco-Friendly Nordic Cat Tower</h3>
+<p class="text-body-md text-secondary mt-1">Material: Natural Oak &amp; Merino Wool</p>
+</div>
+<button class="text-secondary hover:text-error transition-colors p-2 rounded-full hover:bg-error-container/10">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex items-center border border-border-light rounded-xl overflow-hidden bg-white">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-subtle transition-colors text-secondary" onclick="updateQty(this, -1)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-12 text-center font-label-lg" data-qty="1">1</span>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-subtle transition-colors text-secondary" onclick="updateQty(this, 1)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="text-right">
+<span class="block text-label-sm text-secondary line-through">$240.00</span>
+<span class="text-headline-md text-primary font-bold">$189.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-white rounded-xl p-6 custom-shadow border border-transparent hover:border-border-light transition-all flex flex-col sm:flex-row gap-6">
+<div class="w-full sm:w-32 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-surface-subtle">
+<img class="w-full h-full object-cover" data-alt="Close-up shot of a sophisticated leather dog harness in a deep forest green color with polished brass hardware. The harness is displayed on a clean white background with soft ambient shadows. The image quality is editorial-grade, highlighting the meticulous stitching and the premium quality of the leather, evoking a sense of durability and elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApSnfPYA0LPfhpdldnwVGztaV4_w_a-uxAIqxvY9NM-RR4HUhcWEU0oRHPagv9-H-XooGxepZ55YNABE3j8K9vZEgjWT8IEhAk7UmgVIdfBXwJkctYt_LBhcKhSSZ4l6mFVCu_d0s_8gvFJjDOsktdYbTNPrJr_yDbYUI-5B60EfVF2e8dcUP1lpZZS8VOOcfGjwRZgVXqQmAjIKdSbVa8KCsd1gf7XJ8S-b5KSzf9J9vwODhlbi3D-4_0X10Y6s1ZhaxNSX3k1TI"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-sm text-primary uppercase font-bold tracking-wider mb-1 block">Walk Gear</span>
+<h3 class="font-headline-md text-headline-md text-on-background">Signature Leather Harness</h3>
+<p class="text-body-md text-secondary mt-1">Color: Forest Green | Size: Medium</p>
+</div>
+<button class="text-secondary hover:text-error transition-colors p-2 rounded-full hover:bg-error-container/10">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex items-center border border-border-light rounded-xl overflow-hidden bg-white">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-subtle transition-colors text-secondary" onclick="updateQty(this, -1)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-12 text-center font-label-lg" data-qty="1">1</span>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-subtle transition-colors text-secondary" onclick="updateQty(this, 1)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="text-right">
+<span class="text-headline-md text-primary font-bold">$85.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-white rounded-xl p-6 custom-shadow border border-transparent hover:border-border-light transition-all flex flex-col sm:flex-row gap-6">
+<div class="w-full sm:w-32 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-surface-subtle">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of high-protein organic dog kibble inside a minimalist ceramic bowl. The focus is sharp on the texture of the kibble, which appears rich and nutrient-dense. The scene is set on a light gray marble surface under bright, daylight-balanced lighting, creating a clean and appetizing visual that emphasizes transparency and quality in pet nutrition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmJrue5tOla0Vq13EhCIxykS8VpDijB6mfNJWhCQ_QEtQSj0miwbdH4onSJEMC6qNmRg5dcvgv2i1BkeknOhxPKjBdh92LaFwwXjVHuNhgITBRixY8tjJewRMnM8Lcom1VdzqHG9kyHscdKtsTkXKqttZ2XkLiFXV1bdbERHyXEKg962ZpsfrpDxIcv1fforvDonWOY8d3LdT46Laja3qEcAkYU8aNnUfAkNbP53WEbfTb8MuQi9UE-3iF1Xm8sIxAyTtfXxsbUQg"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-sm text-primary uppercase font-bold tracking-wider mb-1 block">Nutrition</span>
+<h3 class="font-headline-md text-headline-md text-on-background">Organic Grain-Free Salmon Mix</h3>
+<p class="text-body-md text-secondary mt-1">Weight: 5kg Bag</p>
+</div>
+<button class="text-secondary hover:text-error transition-colors p-2 rounded-full hover:bg-error-container/10">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-end mt-4">
+<div class="flex items-center border border-border-light rounded-xl overflow-hidden bg-white">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-subtle transition-colors text-secondary" onclick="updateQty(this, -1)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-12 text-center font-label-lg" data-qty="1">1</span>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-subtle transition-colors text-secondary" onclick="updateQty(this, 1)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="text-right">
+<span class="text-headline-md text-primary font-bold">$42.50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Continue Shopping -->
+<a class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all mt-4" href="#">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Continue Shopping
+                </a>
+</div>
+<!-- Order Summary Section -->
+<aside class="lg:col-span-4 sticky top-24">
+<div class="bg-white rounded-xl p-8 custom-shadow border border-border-light">
+<h2 class="font-headline-md text-headline-md mb-6">Order Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between text-body-md text-secondary">
+<span>Subtotal</span>
+<span class="text-on-background font-semibold">$316.50</span>
+</div>
+<div class="flex justify-between text-body-md text-secondary">
+<span>Shipping</span>
+<span class="text-on-background font-semibold">$20.00</span>
+</div>
+<div class="flex justify-between text-body-md text-secondary">
+<span>Estimated Tax</span>
+<span class="text-on-background font-semibold">$25.32</span>
+</div>
+<div class="pt-4 border-t border-border-light flex justify-between">
+<span class="font-headline-md text-headline-md text-on-background">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$361.82</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mb-8">
+<label class="block text-label-sm font-bold text-secondary uppercase tracking-wider mb-2">Promo Code</label>
+<div class="flex gap-2">
+<input class="flex-grow h-12 px-4 rounded-xl border border-border-light focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Enter code" type="text"/>
+<button class="px-4 bg-surface-subtle text-primary font-bold rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all">Apply</button>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white font-bold rounded-xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 mb-6">
+                        Proceed to Checkout
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- Trust Badges -->
+<div class="space-y-3 pt-6 border-t border-border-light">
+<div class="flex items-center gap-3 text-label-sm text-secondary">
+<span class="material-symbols-outlined text-primary text-[20px]">lock</span>
+                            Secure encrypted checkout
+                        </div>
+<div class="flex items-center gap-3 text-label-sm text-secondary">
+<span class="material-symbols-outlined text-primary text-[20px]">local_shipping</span>
+                            Free shipping on orders over $500
+                        </div>
+<div class="flex items-center gap-3 text-label-sm text-secondary">
+<span class="material-symbols-outlined text-primary text-[20px]">history</span>
+                            30-day premium return policy
+                        </div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container full-width border-t border-border-light mt-20">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-gutter px-margin-desktop py-12 max-w-container-max mx-auto">
+<div class="col-span-2 lg:col-span-1">
+<div class="text-headline-md font-headline-md text-primary mb-4">PetStore Hub</div>
+<p class="text-secondary font-body-md pr-4 mb-6">Editorial-grade pet supplies for the discerning companion.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary shadow-sm hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-primary mb-2">Quick Links</h4>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Our Story</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Find a Store</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Gift Cards</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Pet Blog</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-primary mb-2">Categories</h4>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Cat Furniture</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Dog Accessories</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Premium Nutrition</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Limited Editions</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-primary mb-2">Policies</h4>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Refund Policy</a>
+</div>
+<div class="col-span-2 lg:col-span-1">
+<h4 class="font-bold text-primary mb-2">Newsletter</h4>
+<p class="text-label-sm text-secondary mb-4">Join for exclusive early access to curated drops.</p>
+<div class="flex flex-col gap-2">
+<input class="h-10 px-4 rounded-lg bg-white border border-border-light text-body-md focus:outline-none focus:border-primary" placeholder="Email address" type="email"/>
+<button class="h-10 bg-primary text-white font-bold rounded-lg hover:brightness-110 transition-all">Subscribe</button>
+</div>
+</div>
+</div>
+<div class="border-t border-border-light py-6 text-center text-label-sm text-secondary">
+            © 2024 PetStore Hub. Editorial-grade pet supplies. All rights reserved.
+        </div>
+</footer>
+<script>
+        function updateQty(btn, change) {
+            const container = btn.parentElement;
+            const qtySpan = container.querySelector('[data-qty]');
+            let currentQty = parseInt(qtySpan.getAttribute('data-qty'));
+            
+            currentQty = Math.max(1, currentQty + change);
+            qtySpan.setAttribute('data-qty', currentQty);
+            qtySpan.textContent = currentQty;
+
+            // Simple visual feedback
+            qtySpan.classList.add('scale-110', 'text-primary');
+            setTimeout(() => {
+                qtySpan.classList.remove('scale-110', 'text-primary');
+            }, 200);
+        }
+
+        // Mini interaction for cart icons
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            icon.addEventListener('mouseenter', () => {
+                icon.style.fontVariationSettings = "'FILL' 1, 'wght' 400";
+            });
+            icon.addEventListener('mouseleave', () => {
+                icon.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+            });
+        });
+    </script>
+</body></html>

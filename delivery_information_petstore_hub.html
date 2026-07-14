@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Delivery Information | PetStore Hub</title>
+<meta content="Complete your pet supply order with delivery details." name="description"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for better editorial feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f8f9ff; }
+        ::-webkit-scrollbar-thumb { background: #d0dbed; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #006e2f; }
+        
+        .input-glow:focus {
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.1);
+        }
+        
+        .floating-label-group {
+            position: relative;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 sticky z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">PetStore Hub</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">Shop</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">Categories</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">About</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="hidden lg:block relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="bg-surface-container-low border-none rounded-xl py-2 pl-10 pr-4 w-64 focus:ring-2 focus:ring-primary/20 text-body-md" placeholder="Search premium supplies..." type="text"/>
+</div>
+<button class="hover:scale-105 transition-transform duration-200 relative">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">3</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Progress Indicator -->
+<div class="max-w-container-max mx-auto px-margin-desktop mt-12 mb-8">
+<div class="flex items-center justify-center gap-4 text-label-lg">
+<div class="flex items-center gap-2 text-primary">
+<span class="w-8 h-8 rounded-full border-2 border-primary flex items-center justify-center font-bold">1</span>
+<span class="hidden md:block">Payment</span>
+</div>
+<div class="h-[2px] w-12 bg-primary"></div>
+<div class="flex items-center gap-2 text-primary">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">2</span>
+<span class="hidden md:block">Delivery</span>
+</div>
+<div class="h-[2px] w-12 bg-border-light"></div>
+<div class="flex items-center gap-2 text-secondary opacity-50">
+<span class="w-8 h-8 rounded-full border-2 border-border-light flex items-center justify-center font-bold">3</span>
+<span class="hidden md:block">Success</span>
+</div>
+</div>
+</div>
+<section class="max-w-container-max mx-auto px-margin-desktop pb-24 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Delivery Form -->
+<div class="lg:col-span-8 bg-white rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] p-8 md:p-12">
+<div class="mb-10">
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-2">Delivery Details</h1>
+<p class="text-secondary font-body-md">Where should we send your editorial-grade pet essentials?</p>
+</div>
+<form class="space-y-8" id="delivery-form">
+<!-- Section: Personal Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="fullName">Full Name</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="fullName" name="fullName" placeholder="e.g. Julian Sterling" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="phone">Phone Number</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="phone" name="phone" placeholder="+1 (555) 000-0000" required="" type="tel"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="font-label-lg text-on-surface-variant" for="email">Email Address</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="email" name="email" placeholder="julian@example.com" required="" type="email"/>
+</div>
+</div>
+<div class="h-px bg-surface-subtle w-full"></div>
+<!-- Section: Address -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-2 md:col-span-3">
+<label class="font-label-lg text-on-surface-variant" for="country">Country</label>
+<select class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md appearance-none" id="country" name="country" required="">
+<option value="US">United States</option>
+<option value="UK">United Kingdom</option>
+<option value="CA">Canada</option>
+<option value="AU">Australia</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="font-label-lg text-on-surface-variant" for="address">Street Address</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="address" name="address" placeholder="123 Lush Garden Way" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="apartment">Apartment / Suite</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="apartment" name="apartment" placeholder="Apt 4B" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="city">City</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="city" name="city" placeholder="Palo Alto" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="state">State / Province</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="state" name="state" placeholder="California" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="zip">Postal Code</label>
+<input class="h-12 px-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md" id="zip" name="zip" placeholder="94301" required="" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-lg text-on-surface-variant" for="notes">Delivery Notes (Optional)</label>
+<textarea class="p-4 rounded-xl border-border-light focus:border-primary input-glow transition-all outline-none bg-white text-body-md resize-none" id="notes" name="notes" placeholder="e.g. Leave by the front gate, behind the potted plant." rows="4"></textarea>
+</div>
+<button class="w-full h-14 bg-primary text-white font-headline-md rounded-xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-lg shadow-primary/10" type="submit">
+                        Complete Order
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+</div>
+<!-- Right: Order Summary Sidebar -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(31,41,55,0.04)] p-8 sticky top-24">
+<h2 class="font-headline-md text-headline-md mb-6">Order Summary</h2>
+<div class="space-y-4 mb-6">
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium artisanal dog leash made of sustainable hemp, deep forest green color, studio lighting, soft shadows, high-end commercial pet photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSYlp-wYQddF9KefSYb2ZYa6xLW2X_Vu-h39Lloe9mBN2JU8KaFOTUCMxRkt0Qvvup9k8ZSrXd0556YoaQ4j-KpSCqvCSmTSxujpZRS6iyNnzdFYe2C0Iv4Ne_qy2l8cCC6RrbtBxW4am3EpQpvYcl0v-gURf9xozu_e5q2FL4N04yfvpt0mqJALYAjUlfYYj9rsAwUgmn2afLLV55EUTr2S_3XnAmU3Y5ctuONVXzu1iygj5oo3UZb7nwYRK9mV7eWbIbFETeMQE"/>
+</div>
+<div class="flex-grow">
+<p class="font-label-lg text-on-background">EverGreen Hemp Leash</p>
+<p class="text-label-sm text-secondary">Qty: 1</p>
+<p class="font-body-md text-primary">$42.00</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist ceramic pet bowl in matte white finish, organic shape, soft natural lighting on a clean wooden surface, lifestyle pet store aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwozqIdJWjU0L1RvA2SJ5t-J8BgOBAcJdqOOix5W-O3BBnNIqve9b_VO1leB5hjlyX5UBNxBea4vxD4U9z5m4IkCt8xqdkqAhLSpCG--xpt8YPL3HWtcNguzeT5t_HLrxzYvLVTWRRWWIHNwmJJeN9d7AmI8xaLMz71q8Uyhj2ZakNuN25D594UwogMm22P1MqW0nNlu34BFhGTpQHtKtJsRm3PlGDria3dMmDa-dOGYD8tI1QlD_ARBxoSqmKk0V8SKbNaM_dkkk"/>
+</div>
+<div class="flex-grow">
+<p class="font-label-lg text-on-background">Luna Ceramic Bowl</p>
+<p class="text-label-sm text-secondary">Qty: 2</p>
+<p class="font-body-md text-primary">$56.00</p>
+</div>
+</div>
+</div>
+<div class="space-y-3 pt-6 border-t border-surface-subtle">
+<div class="flex justify-between text-body-md text-secondary">
+<span>Subtotal</span>
+<span>$98.00</span>
+</div>
+<div class="flex justify-between text-body-md text-secondary">
+<span>Flat Shipping</span>
+<span>$20.00</span>
+</div>
+<div class="flex justify-between text-body-md text-secondary">
+<span>Tax (Estimated)</span>
+<span>$8.24</span>
+</div>
+<div class="flex justify-between font-headline-md text-headline-md text-on-background pt-3">
+<span>Total</span>
+<span class="text-primary">$126.24</span>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container-low rounded-xl flex gap-3">
+<span class="material-symbols-outlined text-primary" data-weight="fill">verified_user</span>
+<div>
+<p class="text-label-lg font-bold text-on-primary-container">Secure Transaction</p>
+<p class="text-label-sm text-on-secondary-container">Your payment information has been processed securely.</p>
+</div>
+</div>
+</div>
+<!-- Atmospheric Card -->
+<div class="relative h-48 rounded-xl overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 z-0 scale-105 group-hover:scale-110 transition-transform duration-700">
+<img class="w-full h-full object-cover" data-alt="A happy golden retriever running through a sun-drenched lush green meadow at golden hour, blurred background, warm lighting, editorial photography, feeling of freedom and high-quality pet care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV2HKpeSCE-kyY3ic3_TASQeRfN6fkI4f8iivF1eBlLWSRMuBxLfaLzm1hs63_g16O2m2sFjJfMWE3Xu5UijEfGzOYzwFdQ8MIQBEuLIaFbq1U2ffyRVYtee6vLvCIHXrsvCJxiWd10vDlK91rLAa8aSGvg1E7ZALzk4s7KIOMwJaeXSF1vYFw3-nEBImeSZCmaaxhbriueIcSDTPNQobdjESjdb_Fp7CeqrEsf_MvrkpKXaHwZzWwktu2_bXa7Rqx2SveIjpv1wI"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute bottom-6 left-6 z-20">
+<p class="text-white font-headline-md">Happy Pets, Guaranteed.</p>
+<p class="text-white/80 text-label-sm">30-day premium return policy.</p>
+</div>
+</div>
+</aside>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container dark:bg-surface-container-highest border-t border-border-light dark:border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-gutter px-margin-desktop py-12 max-w-container-max mx-auto">
+<div class="col-span-2 lg:col-span-1">
+<div class="text-headline-md font-headline-md text-primary mb-4">PetStore Hub</div>
+<p class="text-secondary font-body-md mb-6 leading-relaxed">Editorial-grade pet supplies for the discerning companion.</p>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-4">Quick Links</h4>
+<ul class="space-y-2 text-secondary font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">Our Story</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Journal</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-4">Categories</h4>
+<ul class="space-y-2 text-secondary font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">Canine</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Feline</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Living</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-4">Policies</h4>
+<ul class="space-y-2 text-secondary font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">Shipping</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Returns</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-lg text-primary mb-4">Newsletter</h4>
+<div class="flex flex-col gap-3">
+<input class="h-10 px-3 bg-white/50 rounded-lg border-border-light text-body-md focus:border-primary outline-none" placeholder="Email" type="email"/>
+<button class="bg-primary text-white py-2 rounded-lg text-label-lg font-bold">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-8 border-t border-border-light/30">
+<p class="text-secondary text-label-sm text-center">© 2024 PetStore Hub. Editorial-grade pet supplies.</p>
+</div>
+</footer>
+<script>
+        // Simple Interaction Logic
+        document.getElementById('delivery-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            
+            // Visual feedback for completion
+            btn.disabled = true;
+            btn.innerHTML = `
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Processing Order...
+            `;
+
+            // Simulate transition to success page
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // In a real app, we would redirect here.
+                alert('Order placed successfully! Redirecting to confirmation page...');
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }, 1500);
+        });
+
+        // Floating label micro-interaction (manual)
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label')?.classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('</script></body></html>

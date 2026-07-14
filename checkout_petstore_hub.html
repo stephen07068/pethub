@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | PetStore Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#314d3e",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#4ae176",
+                    "on-secondary-container": "#616363",
+                    "on-background": "#121c2a",
+                    "on-surface-variant": "#3d4a3d",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#486554",
+                    "primary": "#006e2f",
+                    "tertiary-fixed-dim": "#afceba",
+                    "background": "#F8FAFC",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#dfe0e0",
+                    "outline": "#6d7b6c",
+                    "on-tertiary-fixed": "#042014",
+                    "error": "#ba1a1a",
+                    "surface": "#f8f9ff",
+                    "primary-container": "#22c55e",
+                    "tertiary-fixed": "#caead6",
+                    "surface-tint": "#006e2f",
+                    "inverse-primary": "#4ae176",
+                    "on-tertiary-container": "#2a4637",
+                    "on-error-container": "#93000a",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#121c2a",
+                    "surface-container": "#e6eeff",
+                    "surface-subtle": "#F1F5F9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-light": "#E2E8F0",
+                    "on-primary-fixed-variant": "#005321",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e2e2e2",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454747",
+                    "outline-variant": "#bccbb9",
+                    "surface-variant": "#d9e3f6",
+                    "on-primary-container": "#004b1e",
+                    "tertiary-container": "#95b3a0",
+                    "surface-dim": "#d0dbed",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002109",
+                    "primary-fixed": "#6bff8f",
+                    "inverse-on-surface": "#eaf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "32px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "display": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .payment-option-radio:checked + .payment-card {
+            border-color: #006e2f;
+            background-color: #eff4ff;
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 sticky z-50 shadow-[0px_4px_20px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">PetStore Hub</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md" href="#">Shop</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md" href="#">Categories</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md" href="#">About</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-primary hover:scale-105 transition-transform cursor-pointer" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary-container text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 w-full">
+<!-- Checkout Breadcrumb / Progress -->
+<div class="flex items-center justify-center gap-4 mb-12">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-label-lg">1</span>
+<span class="font-label-lg text-primary">Cart</span>
+</div>
+<div class="w-12 h-[2px] bg-primary"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-label-lg">2</span>
+<span class="font-label-lg text-primary">Checkout</span>
+</div>
+<div class="w-12 h-[2px] bg-border-light"></div>
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-surface-container-high text-secondary flex items-center justify-center font-bold text-label-lg">3</span>
+<span class="font-label-lg text-secondary">Success</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Side: Order Summary -->
+<div class="lg:col-span-7 space-y-8">
+<div class="bg-white rounded-xl p-8 shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light/50">
+<h2 class="font-headline-md text-headline-md mb-6">Order Summary</h2>
+<div class="divide-y divide-border-light">
+<!-- Line Item 1 -->
+<div class="py-6 flex items-center gap-6">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-container-low flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium, high-resolution product photograph of an organic, ethically-sourced cedar wood cat tree with minimalist aesthetic. The lighting is soft and natural, emphasizing the texture of the wood and the cream-colored linen cushions. The background is a clean, bright-white studio setting, reflecting a modern and luxurious pet lifestyle brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClP8l-uHyHzdUUhnu0q21VdqocnB3zJWzEkYlHG9W9lU9RbP3_72FRp4d7fTFiQ-DfYdhmrGCURX7aQPlGNoIasSGCR5h8PxTrs2wjypR2z1WTbho6dZyKfsHuDXuHkbpO_KUb8fJURXyI5D3q4l7jOlZsaKG9ex6TbGHpp_SUnB11Z-fxn9vJolkMRgyqPYEZxp2g_er9oRLk2Xjwwbr1LOjke2DyJ6eVKWPaiyZZNxbIE3eQHYTlW5SFiy7gGqnRZ9_MslvbcA4"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Living</p>
+<h3 class="font-headline-md text-body-lg">Zen Cedar Cat Tower</h3>
+</div>
+<p class="font-label-lg text-primary">$189.00</p>
+</div>
+<div class="mt-2 flex items-center text-label-sm text-secondary">
+<span>Quantity: 1</span>
+<span class="mx-2">•</span>
+<span>Color: Natural Cedar</span>
+</div>
+</div>
+</div>
+<!-- Line Item 2 -->
+<div class="py-6 flex items-center gap-6">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-surface-container-low flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="An editorial close-up of a designer leather dog collar in a deep forest green color, featuring brushed brass hardware. The photograph is taken from a low angle with a shallow depth of field, highlighting the fine stitching and premium leather grain. The overall atmosphere is sophisticated and high-end, suited for a luxury pet boutique." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0rG1E9B8-yQ09_N87Q2wuwLte6gStN8uqXrlnDdQfW69qrglNPuX3oPrsJLKN14b_i2sTIvToFdicBP83CUDGoStXVjWOvOf-ooA07jqheHm1vgJ5mR7VyaSyty1qwLg3Sykz8aQgR4hd9TcXo5tMigcFyHBzzBOcM0EauUNZjhgQQePFcjXt17-MHq_6oREsaxcUInMO2SSQGnTV2tic2uvVTZ0Hcu-AvJfBPrsuHi7RpVcyz21WD0TpwfstDHHG6cWxPI00ZiE"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Accessories</p>
+<h3 class="font-headline-md text-body-lg">Heritage Leather Collar</h3>
+</div>
+<p class="font-label-lg text-primary">$45.00</p>
+</div>
+<div class="mt-2 flex items-center text-label-sm text-secondary">
+<span>Quantity: 1</span>
+<span class="mx-2">•</span>
+<span>Size: Medium</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals Section -->
+<div class="mt-8 pt-8 border-t border-border-light space-y-4">
+<div class="flex justify-between text-body-md">
+<span class="text-secondary">Subtotal</span>
+<span class="font-label-lg">$234.00</span>
+</div>
+<div class="flex justify-between text-body-md">
+<div class="flex items-center gap-2">
+<span class="text-secondary">Shipping</span>
+<span class="material-symbols-outlined text-[16px] text-secondary cursor-help" title="Flat rate priority shipping">info</span>
+</div>
+<span class="font-label-lg">$20.00</span>
+</div>
+<div class="flex justify-between text-body-md">
+<span class="text-secondary">Estimated Tax</span>
+<span class="font-label-lg">$18.72</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-border-light mt-4">
+<span class="font-headline-md text-headline-md">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$272.72</span>
+</div>
+</div>
+</div>
+<!-- Guest Checkout Information -->
+<div class="bg-surface-container-low/50 rounded-xl p-8 border border-border-light/30">
+<h3 class="font-headline-md text-body-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+                        Guest Contact Information
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-label-sm text-secondary mb-2">Email Address</label>
+<input class="w-full h-12 px-4 rounded-xl border border-border-light focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="email@example.com" type="email"/>
+</div>
+<div>
+<label class="block text-label-sm text-secondary mb-2">Phone Number</label>
+<input class="w-full h-12 px-4 rounded-xl border border-border-light focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Payment Selection -->
+<div class="lg:col-span-5">
+<div class="bg-white rounded-xl p-8 shadow-[0px_4px_20px_rgba(31,41,55,0.04)] border border-border-light/50 sticky top-24">
+<h2 class="font-headline-md text-headline-md mb-2">Payment Method</h2>
+<p class="text-body-md text-secondary mb-8">Secure, encrypted transactions only.</p>
+<form class="space-y-4" id="paymentForm">
+<!-- Apple Pay -->
+<label class="block cursor-pointer">
+<input checked="" class="hidden payment-option-radio" name="payment" type="radio" value="apple_pay"/>
+<div class="payment-card flex items-center justify-between p-5 rounded-xl border border-border-light hover:border-primary/50 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+<svg fill="white" height="24" viewbox="0 0 24 24" width="24"><path d="M17.05 20.28c-.96.95-2.18 2.02-3.6 2.02-1.39 0-1.84-.85-3.41-.85-1.57 0-2.07.83-3.41.85-1.38.02-2.73-1.2-3.7-2.15-2-1.92-3.45-5.42-3.45-8.8 0-3.35 1.71-5.11 3.32-5.11 1.25 0 2.21.78 3.09.78.86 0 2.02-.8 3.42-.8 1.48 0 3.75.61 4.96 2.39-2.91 1.54-2.45 5.56.45 6.84-.71 1.72-1.74 3.43-2.67 4.83zm-4.71-15.65c.61-.75 1.02-1.79.91-2.83-.89.04-1.96.6-2.59 1.34-.57.65-.96 1.72-.85 2.74 1-.08 1.94-.52 2.53-1.25z"></path></svg>
+</div>
+<span class="font-label-lg">Apple Pay</span>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 transition-opacity check-icon">check_circle</span>
+</div>
+</label>
+<!-- Google Pay -->
+<label class="block cursor-pointer">
+<input class="hidden payment-option-radio" name="payment" type="radio" value="google_pay"/>
+<div class="payment-card flex items-center justify-between p-5 rounded-xl border border-border-light hover:border-primary/50 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white border border-border-light rounded-lg flex items-center justify-center">
+<svg height="24" viewbox="0 0 24 24" width="24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+</div>
+<span class="font-label-lg">Google Pay</span>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 transition-opacity check-icon">check_circle</span>
+</div>
+</label>
+<!-- Crypto -->
+<label class="block cursor-pointer">
+<input class="hidden payment-option-radio" name="payment" type="radio" value="crypto"/>
+<div class="payment-card flex items-center justify-between p-5 rounded-xl border border-border-light hover:border-primary/50 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="currency_bitcoin">currency_bitcoin</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg">Cryptocurrency</span>
+<span class="text-[10px] text-secondary">BTC, ETH, USDC</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 transition-opacity check-icon">check_circle</span>
+</div>
+</label>
+<!-- Gift Card -->
+<label class="block cursor-pointer">
+<input class="hidden payment-option-radio" name="payment" type="radio" value="gift_card"/>
+<div class="payment-card flex items-center justify-between p-5 rounded-xl border border-border-light hover:border-primary/50 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed" data-icon="featured_seasonal_and_gifts">featured_seasonal_and_gifts</span>
+</div>
+<span class="font-label-lg">Gift Card</span>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 transition-opacity check-icon">check_circle</span>
+</div>
+</label>
+</form>
+<div class="mt-8 space-y-4">
+<button class="w-full bg-primary text-white h-14 rounded-xl font-label-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                            Pay $272.72
+                            <span class="material-symbols-outlined">lock</span>
+</button>
+<p class="text-center text-[12px] text-secondary">
+                            Your payment is secured with 256-bit SSL encryption.
+                        </p>
+</div>
+<!-- Trust Badges -->
+<div class="mt-8 flex justify-center gap-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+<span class="material-symbols-outlined text-[32px]">verified_user</span>
+<span class="material-symbols-outlined text-[32px]">shield</span>
+<span class="material-symbols-outlined text-[32px]">security</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest border-t border-border-light dark:border-outline-variant mt-24">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-gutter px-margin-desktop py-12 max-w-container-max mx-auto">
+<div class="col-span-2 lg:col-span-1">
+<div class="text-headline-md font-headline-md text-primary mb-4">PetStore Hub</div>
+<p class="text-body-md text-secondary leading-relaxed">Editorial-grade pet supplies for the discerning modern pet owner.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-primary">Quick Links</h4>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Track Order</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Gift Cards</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Store Locator</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-primary">Categories</h4>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Dog Essentials</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Cat Luxury</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Wellness</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-lg text-primary">Policies</h4>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Shipping</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Returns</a>
+<a class="text-secondary hover:text-primary transition-colors" href="#">Privacy</a>
+</div>
+<div class="col-span-2 md:col-span-4 lg:col-span-1 mt-8 lg:mt-0">
+<h4 class="font-label-lg text-primary mb-4">Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-white border border-border-light rounded-lg px-3 py-2 text-label-sm w-full outline-none focus:border-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white px-4 py-2 rounded-lg hover:brightness-110 transition-all">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-6 border-t border-border-light/30">
+<p class="text-label-sm text-secondary text-center">© 2024 PetStore Hub. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for payment selection
+        const radios = document.querySelectorAll('.payment-option-radio');
+        const updateSelection = () => {
+            document.querySelectorAll('.check-icon').forEach(icon => icon.classList.add('opacity-0'));
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    radio.parentElement.querySelector('.check-icon').classList.remove('opacity-0');
+                    radio.parentElement.querySelector('.check-icon').classList.add('opacity-100');
+                }
+            });
+        };
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', updateSelection);
+        });
+
+        // Initialize state
+        updateSelection();
+
+        // Button press effect
+        const payBtn = document.querySelector('button');
+        payBtn.addEventListener('click', () => {
+            payBtn.innerHTML = `Processing... <span class="material-symbols-outlined animate-spin">refresh</span>`;
+            setTimeout(() => {
+                payBtn.innerHTML = `Payment Successful <span class="material-symbols-outlined">check</span>`;
+                payBtn.classList.replace('bg-primary', 'bg-tertiary');
+            }, 2000);
+        });
+    </script>
+</body></html>
