@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { 
   MdDashboard, MdInventory2, MdCategory, MdShoppingBag, 
-  MdWarehouse, MdSettings, MdAnalytics, MdLogout
+  MdWarehouse, MdSettings, MdAnalytics, MdLogout, MdMenu
 } from 'react-icons/md';
 import { adminApi } from '../../services/api';
 
