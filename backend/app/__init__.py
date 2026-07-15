@@ -32,10 +32,25 @@ def _seed_initial_data(app):
             dog_cat = Category(name="Dogs", slug="dogs", description="Premium pet dogs")
             db.session.add(dog_cat)
 
+        dog_food_cat = Category.query.filter_by(slug="dog-food").first()
+        if not dog_food_cat:
+            dog_food_cat = Category(name="Dog Food", slug="dog-food", description="Nutritious food for dogs")
+            db.session.add(dog_food_cat)
+
+        dog_toys_cat = Category.query.filter_by(slug="dog-toys").first()
+        if not dog_toys_cat:
+            dog_toys_cat = Category(name="Dog Toys", slug="dog-toys", description="Fun toys for dogs")
+            db.session.add(dog_toys_cat)
+
         cat_cat = Category.query.filter_by(slug="cats").first()
         if not cat_cat:
             cat_cat = Category(name="Cats", slug="cats", description="Premium pet cats")
             db.session.add(cat_cat)
+
+        cat_food_cat = Category.query.filter_by(slug="cat-food").first()
+        if not cat_food_cat:
+            cat_food_cat = Category(name="Cat Food", slug="cat-food", description="Delicious food for cats")
+            db.session.add(cat_food_cat)
 
         toys_cat = Category.query.filter_by(slug="cat-toys").first()
         if not toys_cat:
