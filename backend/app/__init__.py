@@ -184,6 +184,7 @@ def create_app(env=None):
     from .routes.admin_dashboard import admin_dashboard_bp
     from .routes.analytics import analytics_bp
     from .routes.contact import contact_bp
+    from .routes.setup import setup_bp
 
     app.register_blueprint(auth_bp,           url_prefix="/api/auth")
     app.register_blueprint(products_bp,       url_prefix="/api/products")
@@ -199,6 +200,7 @@ def create_app(env=None):
     app.register_blueprint(admin_dashboard_bp,url_prefix="/api/admin/dashboard")
     app.register_blueprint(analytics_bp,      url_prefix="/api/admin/analytics")
     app.register_blueprint(contact_bp,        url_prefix="/api/contact")
+    app.register_blueprint(setup_bp,          url_prefix="/api/setup")
 
     @app.route("/api/health")
     def health():
