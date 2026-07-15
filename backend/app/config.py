@@ -5,6 +5,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def normalize_database_url(url):
+    """Return a SQLAlchemy-compatible database URL."""
+    if url and url.startswith("postgres://"):
+        return url.replace("postgres://", "postgresql://", 1)
+    return url
+
+
+def parse_csv_env(name, default):
+    value = os.getenv(name, default)
+    return [item.strip().rstrip("/") for item in value.split(",") if item.strip()]
+
+
 class Config:
     """Base configuration."""
     SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-in-prod")
@@ -14,8 +26,12 @@ class Config:
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev-jwt-secret-change-in-prod")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=int(os.getenv("JWT_ACCESS_TOKEN_EXPIRES", 86400)))
 
-    # CORS
-    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    # CORS — support both FRONTEND_URL (single) and FRONTEND_URLS (comma-separated)
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173").rstrip("/")
+    FRONTEND_URLS = parse_csv_env(
+        "FRONTEND_URLS",
+        os.getenv("FRONTEND_URL", "http://localhost:5173"),
+    )
 
     # Upload
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads")
@@ -38,12 +54,14 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///petstorehub.db")
+    SQLALCHEMY_DATABASE_URI = normalize_database_url(
+        os.getenv("DATABASE_URL", "sqlite:///petstorehub.db")
+    )
 
 
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = normalize_database_url(os.getenv("DATABASE_URL"))
 
 class TestingConfig(Config):
     TESTING = True
