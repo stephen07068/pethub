@@ -12,6 +12,7 @@ export default function AdminLayout({ children }) {
   const [authChecked, setAuthChecked] = useState(false);
   const [isAuthed, setIsAuthed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [adminName, setAdminName] = useState('Admin User');
 
   useEffect(() => {
     const token = localStorage.getItem('psh_admin_token');
