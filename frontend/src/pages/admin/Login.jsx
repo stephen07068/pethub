@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { adminApi } from '../../services/api';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
+import { MdArrowBack } from 'react-icons/md';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -99,6 +100,13 @@ export default function AdminLogin() {
             </Button>
           </div>
         </form>
+
+        {/* Return to Home link */}
+        <div className="mt-8 pt-6 border-t border-border-light text-center">
+          <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors text-sm font-medium">
+            <MdArrowBack size={16} /> Return to Homepage
+          </Link>
+        </div>
       </div>
     </div>
   );
