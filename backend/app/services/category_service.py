@@ -20,7 +20,8 @@ class CategoryService:
 
     @staticmethod
     def create(data: dict):
-        slug = slugify(data["name"])
+        # Use provided slug if given, otherwise auto-generate from name
+        slug = data.get("slug") or slugify(data["name"])
         if Category.query.filter_by(slug=slug).first():
             return None, f"Category with slug '{slug}' already exists"
         cat = Category(
@@ -41,6 +42,9 @@ class CategoryService:
             return None, "Category not found"
         if "name" in data:
             cat.name = data["name"]
+        if "slug" in data and data["slug"]:
+            cat.slug = data["slug"]
+        elif "name" in data:
             cat.slug = slugify(data["name"])
         if "description" in data:
             cat.description = data["description"]
