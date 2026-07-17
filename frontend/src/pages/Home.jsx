@@ -32,13 +32,12 @@ export default function Home() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
       {/* ── Hero ── */}
-      <section style={{
-        position: 'relative', overflow: 'hidden',
+      <section className="relative overflow-hidden flex flex-col md:flex-row items-center justify-between" style={{
         background: 'linear-gradient(135deg, #eff4ff 0%, #f0fdf4 100%)',
         padding: 'clamp(40px, 8vw, 96px) clamp(16px, 5vw, 64px)',
-        display: 'flex', alignItems: 'center',
+        gap: 'clamp(32px, 5vw, 64px)'
       }}>
-        <div style={{ maxWidth: '600px', zIndex: 10, position: 'relative' }}>
+        <div className="w-full md:w-1/2" style={{ maxWidth: '600px', zIndex: 10, position: 'relative' }}>
           <span style={{ display: 'inline-block', backgroundColor: '#dcfce7', color: '#006e2f', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', padding: '6px 16px', borderRadius: '9999px', marginBottom: '20px', textTransform: 'uppercase' }}>
             Trusted Pet Store
           </span>
@@ -58,10 +57,28 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        
+        {/* Hero Image */}
+        <div className="w-full md:w-1/2 relative flex justify-center z-10 mt-4 md:mt-0">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5uYGOStypKu65qeHgohTwWezKByN9OtMAjnDxAsCnP0IhRsCJ5r5Bj5Pxvn_bg-ri89myGBjoHqYGR_Jk0AY6bxdi7VNvtUf8P4o7DjqAcoytqAy2EvFJDExmxKTxXEDyzI5dDwjzJsdAK0sLkBupN2rlWkXPNfAhqNiz2Hrm7anqvZsYK3YT7M8qcaOX69krTbCWJlwPDKvQYVIiIv04KflDo1MbX-m8BwB-sp8fJ5gHB_hKZjplJrTCusCZLP0CuO5EwbUanQs"
+            alt="Happy pets"
+            style={{
+              width: '100%',
+              maxWidth: '540px',
+              height: 'clamp(300px, 40vw, 500px)',
+              objectFit: 'cover',
+              borderRadius: '32px',
+              boxShadow: '0 25px 50px -12px rgba(0, 110, 47, 0.25)'
+            }}
+          />
+        </div>
+
         {/* Decorative blobs */}
         <div style={{ position: 'absolute', right: '-60px', top: '-60px', width: '320px', height: '320px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.06, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', right: '80px', bottom: '-40px', width: '180px', height: '180px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.08, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '40%', bottom: '-40px', width: '180px', height: '180px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.08, pointerEvents: 'none' }} />
       </section>
+
 
       {/* ── Shop by Category ── */}
       <section style={{ padding: 'clamp(36px, 6vw, 80px) clamp(16px, 5vw, 64px)' }}>
