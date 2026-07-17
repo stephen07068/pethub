@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MdAdd, MdEdit, MdDelete, MdSearch } from 'react-icons/md';
+import { MdAdd, MdEdit, MdDelete, MdSearch, MdClose } from 'react-icons/md';
 import AdminLayout from '../../components/layout/AdminLayout';
 import { api, adminApi } from '../../services/api';
 
@@ -11,19 +11,26 @@ function resolveImage(url) {
   return `${BACKEND}${url}`;
 }
 
+const inp = {
+  width: '100%', padding: '10px 14px', borderRadius: '8px',
+  border: '1px solid #E2E8F0', fontSize: '14px', color: '#121c2a',
+  outline: 'none', boxSizing: 'border-box', backgroundColor: 'white',
+};
+const lbl = { display: 'block', fontSize: '13px', fontWeight: 600, color: '#374151', marginBottom: '6px' };
+
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
 
-  // Modal State
   const [showModal, setShowModal] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
-    name: '', brand: '', category_id: '', price: '', stock: '', 
+    name: '', brand: '', category_id: '', price: '', stock: '',
     description: '', image: '', status: 'active', features: ''
   });
 
@@ -52,7 +59,7 @@ export default function AdminProducts() {
       await adminApi.deleteProduct(id);
       load();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to delete product. It might be linked to existing orders.');
+      alert(err.response?.data?.message || 'Failed to delete product.');
     }
   };
 
@@ -70,15 +77,27 @@ export default function AdminProducts() {
         status: product.status || 'active',
         features: (product.features || []).join(', ')
       });
+      setImagePreview(resolveImage(product.image || product.primary_image));
     } else {
       setEditingId(null);
-      setFormData({
-        name: '', brand: '', category_id: categories[0]?.id || '', price: '', stock: '', 
-        description: '', image: '', status: 'active', features: ''
-      });
+      setFormData({ name: '', brand: '', category_id: categories[0]?.id || '', price: '', stock: '', description: '', image: '', status: 'active', features: '' });
+      setImagePreview(null);
     }
     setImageFile(null);
     setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setImageFile(null);
+    setImagePreview(null);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
   };
 
   const handleSave = async (e) => {
@@ -108,7 +127,7 @@ export default function AdminProducts() {
         await adminApi.uploadProductImage(savedProductId, imgData);
       }
 
-      setShowModal(false);
+      closeModal();
       load();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to save product');
@@ -124,96 +143,103 @@ export default function AdminProducts() {
 
   return (
     <AdminLayout>
-      <div className="flex justify-between items-center mb-8">
+      {/* Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <h1 className="font-headline-lg" style={{ color: '#121c2a' }}>Products</h1>
-          <p style={{ color: '#5d5f5f' }} className="font-body-md">Manage your product catalog</p>
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: '#121c2a', margin: 0 }}>Products</h1>
+          <p style={{ color: '#5d5f5f', marginTop: '4px', fontSize: '14px' }}>Manage your product catalog</p>
         </div>
-        <button 
+        <button
           onClick={() => openModal()}
-          style={{ backgroundColor: '#006e2f', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
-          <MdAdd size={20} /> Add Product
+          style={{ backgroundColor: '#006e2f', color: 'white', padding: '11px 20px', borderRadius: '10px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, fontSize: '14px', flexShrink: 0 }}>
+          <MdAdd size={18} /> Add Product
         </button>
       </div>
 
       {/* Search */}
-      <div style={{ backgroundColor: 'white', borderRadius: '12px', padding: '16px 24px', marginBottom: '24px', boxShadow: '0px 4px 20px rgba(31,41,55,0.04)', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <MdSearch size={20} style={{ color: '#5d5f5f' }} />
+      <div style={{ backgroundColor: 'white', borderRadius: '10px', padding: '12px 16px', marginBottom: '20px', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <MdSearch size={20} style={{ color: '#9ca3af', flexShrink: 0 }} />
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder="Search products or categories..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ border: 'none', outline: 'none', flex: 1, fontSize: '16px', color: '#121c2a', backgroundColor: 'transparent' }}
+          onChange={e => setSearch(e.target.value)}
+          style={{ border: 'none', outline: 'none', flex: 1, fontSize: '14px', color: '#121c2a', backgroundColor: 'transparent', minWidth: 0 }}
         />
       </div>
 
-      {/* Table */}
-      <div style={{ backgroundColor: 'white', borderRadius: '12px', boxShadow: '0px 4px 20px rgba(31,41,55,0.04)', border: '1px solid #E2E8F0', overflow: 'hidden' }}>
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
+      {/* Table — scrolls horizontally on mobile */}
+      <div style={{ backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0', overflow: 'hidden' }}>
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse', minWidth: '600px' }}>
             <thead>
-              <tr style={{ backgroundColor: 'rgba(241,245,249,0.5)', borderBottom: '1px solid #E2E8F0' }}>
+              <tr style={{ backgroundColor: '#f8fafc', borderBottom: '1px solid #E2E8F0' }}>
                 {['Product', 'Category', 'Price', 'Stock', 'Status', 'Actions'].map(h => (
-                  <th key={h} style={{ padding: '16px 24px', color: '#5d5f5f', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{h}</th>
+                  <th key={h} style={{ padding: '12px 16px', color: '#6b7280', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {isLoading ? (
-                <tr><td colSpan="6" style={{ padding: '48px', textAlign: 'center', color: '#5d5f5f' }}>Loading...</td></tr>
+                <tr><td colSpan="6" style={{ padding: '48px', textAlign: 'center', color: '#9ca3af' }}>Loading...</td></tr>
               ) : filtered.length === 0 ? (
-                <tr><td colSpan="6" style={{ padding: '48px', textAlign: 'center', color: '#5d5f5f' }}>No products found.</td></tr>
+                <tr><td colSpan="6" style={{ padding: '48px', textAlign: 'center', color: '#9ca3af' }}>No products found.</td></tr>
               ) : filtered.map(product => (
-                <tr key={product.id} className="group" style={{ borderBottom: '1px solid #E2E8F0' }}
-                  onMouseEnter={e => e.currentTarget.style.backgroundColor = '#F1F5F9'}
+                <tr key={product.id} style={{ borderBottom: '1px solid #f1f5f9' }}
+                  onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f8fafc'}
                   onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                  <td style={{ padding: '16px 24px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0, backgroundColor: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <td style={{ padding: '12px 16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ width: '40px', height: '40px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0, backgroundColor: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {resolveImage(product.image || product.primary_image) ? (
                           <img src={resolveImage(product.image || product.primary_image)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : (
-                          <span style={{ fontSize: '20px' }}>🐾</span>
+                          <span style={{ fontSize: '18px' }}>🐾</span>
                         )}
                       </div>
                       <div>
-                        <p style={{ fontWeight: 600, color: '#121c2a' }}>{product.name}</p>
-                        <p style={{ fontSize: '12px', color: '#5d5f5f' }}>{product.brand}</p>
+                        <p style={{ fontWeight: 600, color: '#121c2a', fontSize: '14px', whiteSpace: 'nowrap' }}>{product.name}</p>
+                        <p style={{ fontSize: '12px', color: '#9ca3af' }}>{product.brand}</p>
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding: '16px 24px', color: '#5d5f5f', textTransform: 'capitalize' }}>{(product.category?.name || product.category || '').replace(/-/g, ' ')}</td>
-                  <td style={{ padding: '16px 24px', fontWeight: 600, color: '#006e2f' }}>${(product.price ?? 0).toFixed(2)}</td>
-                  <td style={{ padding: '16px 24px' }}>
+                  <td style={{ padding: '12px 16px', color: '#6b7280', fontSize: '13px', whiteSpace: 'nowrap', textTransform: 'capitalize' }}>
+                    {(product.category?.name || product.category || '—').replace(/-/g, ' ')}
+                  </td>
+                  <td style={{ padding: '12px 16px', fontWeight: 700, color: '#006e2f', fontSize: '14px', whiteSpace: 'nowrap' }}>
+                    ${(product.price ?? 0).toFixed(2)}
+                  </td>
+                  <td style={{ padding: '12px 16px' }}>
                     <span style={{
-                      display: 'inline-block', padding: '4px 10px', borderRadius: '9999px', fontSize: '12px', fontWeight: 600,
+                      display: 'inline-block', padding: '3px 10px', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap',
                       backgroundColor: (product.stock ?? 0) > 50 ? '#dcfce7' : (product.stock ?? 0) > 10 ? '#fef9c3' : '#fee2e2',
                       color: (product.stock ?? 0) > 50 ? '#15803d' : (product.stock ?? 0) > 10 ? '#854d0e' : '#991b1b'
                     }}>
                       {product.stock ?? 0} units
                     </span>
                   </td>
-                  <td style={{ padding: '16px 24px' }}>
-                    <span style={{ display: 'inline-block', padding: '4px 10px', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, backgroundColor: product.status === 'active' ? '#dcfce7' : '#f1f5f9', color: product.status === 'active' ? '#15803d' : '#5d5f5f', textTransform: 'capitalize' }}>
+                  <td style={{ padding: '12px 16px' }}>
+                    <span style={{ display: 'inline-block', padding: '3px 10px', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, backgroundColor: product.status === 'active' ? '#dcfce7' : '#f1f5f9', color: product.status === 'active' ? '#15803d' : '#6b7280', textTransform: 'capitalize' }}>
                       {product.status}
                     </span>
                   </td>
-                  <td style={{ padding: '16px 24px' }}>
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      <button 
+                  <td style={{ padding: '12px 16px' }}>
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <button
                         onClick={() => openModal(product)}
-                        style={{ padding: '8px', borderRadius: '8px', border: '1px solid #E2E8F0', cursor: 'pointer', backgroundColor: 'white', color: '#5d5f5f' }}
-                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#006e2f'; e.currentTarget.style.color = 'white'; }}
-                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'white'; e.currentTarget.style.color = '#5d5f5f'; }}>
-                        <MdEdit size={16} />
+                        title="Edit"
+                        style={{ padding: '7px', borderRadius: '7px', border: '1px solid #E2E8F0', cursor: 'pointer', backgroundColor: 'white', color: '#6b7280', display: 'flex' }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#006e2f'; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = '#006e2f'; }}
+                        onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'white'; e.currentTarget.style.color = '#6b7280'; e.currentTarget.style.borderColor = '#E2E8F0'; }}>
+                        <MdEdit size={15} />
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleDelete(product.id)}
-                        style={{ padding: '8px', borderRadius: '8px', border: '1px solid #ffdad6', cursor: 'pointer', backgroundColor: 'white', color: '#ba1a1a' }}
-                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#ffdad6'; }}
+                        title="Delete"
+                        style={{ padding: '7px', borderRadius: '7px', border: '1px solid #fecaca', cursor: 'pointer', backgroundColor: 'white', color: '#ef4444', display: 'flex' }}
+                        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#fee2e2'; }}
                         onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'white'; }}>
-                        <MdDelete size={16} />
+                        <MdDelete size={15} />
                       </button>
                     </div>
                   </td>
@@ -224,33 +250,39 @@ export default function AdminProducts() {
         </div>
       </div>
 
-      {/* Product Modal */}
+      {/* Modal */}
       {showModal && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
-          <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '32px', maxWidth: '600px', width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 25px 50px rgba(0,0,0,.25)' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#121c2a', marginBottom: '24px' }}>{editingId ? 'Edit Product' : 'Add Product'}</h2>
-            
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '16px', overflowY: 'auto' }}>
+          <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '28px', width: '100%', maxWidth: '580px', boxShadow: '0 25px 50px rgba(0,0,0,0.2)', margin: 'auto' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 700, color: '#121c2a', margin: 0 }}>{editingId ? 'Edit Product' : 'Add Product'}</h2>
+              <button onClick={closeModal} style={{ padding: '6px', borderRadius: '8px', border: 'none', backgroundColor: '#f1f5f9', cursor: 'pointer', display: 'flex' }}>
+                <MdClose size={20} color="#6b7280" />
+              </button>
+            </div>
+
             <form onSubmit={handleSave}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+              {/* Responsive 2-col grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px', marginBottom: '14px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Name</label>
-                  <input required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+                  <label style={lbl}>Product Name *</label>
+                  <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} style={inp} placeholder="e.g. Golden Retriever" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Brand</label>
-                  <input required value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+                  <label style={lbl}>Brand *</label>
+                  <input required value={formData.brand} onChange={e => setFormData({ ...formData, brand: e.target.value })} style={inp} placeholder="e.g. PetStore Hub" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Price</label>
-                  <input required type="number" step="0.01" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+                  <label style={lbl}>Price ($) *</label>
+                  <input required type="number" step="0.01" min="0" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} style={inp} placeholder="0.00" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Stock</label>
-                  <input required type="number" value={formData.stock} onChange={e => setFormData({...formData, stock: e.target.value})} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+                  <label style={lbl}>Stock *</label>
+                  <input required type="number" min="0" value={formData.stock} onChange={e => setFormData({ ...formData, stock: e.target.value })} style={inp} placeholder="0" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Category</label>
-                  <select required value={formData.category_id} onChange={e => setFormData({...formData, category_id: e.target.value})} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                  <label style={lbl}>Category *</label>
+                  <select required value={formData.category_id} onChange={e => setFormData({ ...formData, category_id: e.target.value })} style={inp}>
                     <option value="">Select Category</option>
                     {categories.map(c => (
                       <option key={c.id} value={c.id}>{c.name}</option>
@@ -258,51 +290,49 @@ export default function AdminProducts() {
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Status</label>
-                  <select required value={formData.status} onChange={e => setFormData({...formData, status: e.target.value})} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+                  <label style={lbl}>Status</label>
+                  <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} style={inp}>
                     <option value="active">Active</option>
                     <option value="draft">Draft</option>
                   </select>
                 </div>
               </div>
 
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Product Image</label>
-                {formData.image && !imageFile && (
-                  <div style={{ marginBottom: '8px', width: '80px', height: '80px', borderRadius: '8px', overflow: 'hidden', border: '1px solid #E2E8F0', backgroundColor: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {resolveImage(formData.image) ? (
-                      <img src={resolveImage(formData.image)} alt="Current" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : (
-                      <span style={{ fontSize: '24px' }}>🐾</span>
-                    )}
+              {/* Image Upload */}
+              <div style={{ marginBottom: '14px' }}>
+                <label style={lbl}>Product Image</label>
+                {imagePreview && (
+                  <div style={{ marginBottom: '10px', width: '80px', height: '80px', borderRadius: '8px', overflow: 'hidden', border: '2px solid #E2E8F0' }}>
+                    <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                 )}
-                <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files[0])} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0', backgroundColor: '#F8FAFC' }} />
-                <p style={{ fontSize: '12px', color: '#5d5f5f', marginTop: '4px' }}>Select a new image to upload and replace the current one.</p>
+                <input
+                  type="file" accept="image/*"
+                  onChange={handleFileChange}
+                  style={{ ...inp, padding: '8px', cursor: 'pointer', backgroundColor: '#f8fafc' }}
+                />
+                <p style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>Upload a new image to replace the current one.</p>
               </div>
 
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Features (comma separated)</label>
-                <input value={formData.features} onChange={e => setFormData({...formData, features: e.target.value})} placeholder="Durable, Organic, Easy to clean" style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }} />
+              {/* Features */}
+              <div style={{ marginBottom: '14px' }}>
+                <label style={lbl}>Features (comma separated)</label>
+                <input value={formData.features} onChange={e => setFormData({ ...formData, features: e.target.value })} style={inp} placeholder="Durable, Organic, Easy to clean" />
               </div>
 
+              {/* Description */}
               <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#121c2a', marginBottom: '8px' }}>Description</label>
-                <textarea required value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} rows="3" style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}></textarea>
+                <label style={lbl}>Description *</label>
+                <textarea required value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} rows="3" style={{ ...inp, resize: 'vertical', lineHeight: '1.5' }} />
               </div>
 
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-                <button 
-                  type="button"
-                  onClick={() => setShowModal(false)} 
-                  disabled={isSaving}
-                  style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid #E2E8F0', backgroundColor: 'white', color: '#5d5f5f', fontWeight: 600, cursor: 'pointer' }}>
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                <button type="button" onClick={closeModal} disabled={isSaving}
+                  style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid #E2E8F0', backgroundColor: 'white', color: '#6b7280', fontWeight: 600, cursor: 'pointer', fontSize: '14px' }}>
                   Cancel
                 </button>
-                <button 
-                  type="submit"
-                  disabled={isSaving}
-                  style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', backgroundColor: '#006e2f', color: 'white', fontWeight: 600, cursor: 'pointer' }}>
+                <button type="submit" disabled={isSaving}
+                  style={{ padding: '10px 24px', borderRadius: '8px', border: 'none', backgroundColor: '#006e2f', color: 'white', fontWeight: 600, cursor: 'pointer', fontSize: '14px', opacity: isSaving ? 0.7 : 1 }}>
                   {isSaving ? 'Saving...' : 'Save Product'}
                 </button>
               </div>
