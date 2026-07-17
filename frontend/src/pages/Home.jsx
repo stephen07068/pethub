@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdArrowForward } from 'react-icons/md';
-import Button from '../components/common/Button';
 import ProductCard from '../components/product/ProductCard';
 import { api } from '../services/api';
 
@@ -20,157 +19,178 @@ export default function Home() {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const categories = [
+    { slug: 'dogs',      label: 'Dogs & Puppies',    sub: 'Purebred & mixed breeds',    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCOeAx_XXUIwFQ6_tGUkahtUCuLseVNALVe_bLnae4939SyaJiRLRG0jkC66PEeFuVj_EqnCpqIXuLpzZcjnfXbP2cHw3pZfsVc0aYl4SYKdgcN4TgsBNCB4M0EVZ2yD7LXt1qW48Us6UJfq3g5_QyYr7Rd5MLv6RVhzs4HMZOU7uqrwknJzptY56MTksgwMVehahRf7MZKMmv8C_8QbIhk18M0Zsdhclbx_X7MGBvPX1xRIEdRppI22novwF64MnhRmw3vQpkTW3E' },
+    { slug: 'cats',      label: 'Cats & Kittens',    sub: 'Affectionate companions',     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD1e1eUEsePwjkJvdTeUASaHwC1z0JK5rYzfMtXRxUvXtHozSoX0cq05nkW2jg--pH9qZiqfWEq03uA4zZJPHjSsLtTqFsaGbbw6HJA2z3LpLrVKQOHwvMyju4sGAbeTVGj2BM7bb29AZmFuDeM08ts0TQ4WEn0ii0A_d9OCM4Y6zdVHk5FwFi6IjdPKOSRBjY5JulbpFBiV8_AucgXsO9IRRGlSnyqAn7nUoDv0YBlvLawtWExl8-AMJVmxuZ1BkeFTZJ1TmRW9wk' },
+    { slug: 'dog-food',  label: 'Dog Food',           sub: 'Premium nutrition',           img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDM-N73pCkUhUyRM_6tAolvYzebyHUblrX8FIkpPWmXKTuKr9dcRlUuMwfYztCClMghYRmsWl3r0qO1vPrkuwMNSzrng8V8y33fqdJ4-gSW2FJkCo5vIwMWi2Hoc_oAHIfJ1V_bfbGmXUxAyJ2Ao8IyXKS4HvHg-56LLkZ6lqxdp9r1N7aXsdzfDYQLn-ZdxIbyzp8yBL7yrZ0oo6qc9ls6DCU8nnMLEySN3UEmO_jTuI9q18dPu0sETFs-OMtIm9-ndb2R3iB0-ZM' },
+    { slug: 'cat-food',  label: 'Cat Food',           sub: 'Gourmet feline meals',        img: 'https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=600&q=80' },
+    { slug: 'dog-toys',  label: 'Dog Toys',           sub: 'Fun & engaging play',         img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSjHtOV5d_8tzTvmW6w2V0LLHQkw6dvomN_Q4SmF6ficDdHNeNB9zIa3GzXHDkbU6E5TBNviJiF5nwg_B5Z_uJTf_5S1LfniUx4uiwWxiWZ2gFhroR-y7dVCBv4nYWfEVFe6iUOMjqkT7d66HRKqkr6iahwZGxK5W8_pvRBjPhdtA6y9p1kacScscpzExrBL6Qzf9Av81lhzg7jwAJz8rBmbrYkEqFVSq744sODEcauAYCivmZKM--82v7eiUSr1X9Ld6OJqZnR-w' },
+    { slug: 'cat-toys',  label: 'Cat Toys',           sub: 'Interactive & catnip toys',   img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDTgtx3kNhw95J8at-x5V_T-D1qatcszJ0r5yL6mArjUl1PDqJTwYHWpGHc4l6KQ2OtsAguOLhvCZXVbAQG7q-CpLPMLIIcLVIbE0JK8NUFTQZ6CTnHspWOkbyV_1f_t5BUw105EC8mtlYWeNf047cu0ZIYOreh3Kd3cA6gsVyG7LbtQ0WJxxLjhBo4BM6w5u_HRXMfKvCBWJC7vHNVufl9DovbqpBDQIb6iSdw8itJu3tC29Dy9wFBVyc22zQzvE-e2SKU3NzFzwE' },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative w-full h-[600px] overflow-hidden flex items-center px-margin-desktop bg-surface-container-low max-md:px-margin-mobile">
-        <div className="z-10 max-w-2xl">
-          <span className="text-primary font-label-lg tracking-widest bg-primary/10 px-4 py-1 rounded-full mb-6 inline-block">TRUSTED PET STORE</span>
-          <h1 className="font-display text-display text-on-surface mb-6">Pets, Food & Toys<br/><span className="text-primary italic">all in one place</span>.</h1>
-          <p className="text-body-lg text-secondary mb-10 max-w-lg">Healthy dogs & cats for adoption, premium pet food, and fun toys — everything your furry friend needs, delivered to your door.</p>
-          <div className="flex gap-4 max-sm:flex-col">
-            <Link to="/category/dogs">
-              <Button size="lg">Browse Dogs</Button>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+
+      {/* ── Hero ── */}
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        background: 'linear-gradient(135deg, #eff4ff 0%, #f0fdf4 100%)',
+        padding: 'clamp(40px, 8vw, 96px) clamp(16px, 5vw, 64px)',
+        display: 'flex', alignItems: 'center',
+      }}>
+        <div style={{ maxWidth: '600px', zIndex: 10, position: 'relative' }}>
+          <span style={{ display: 'inline-block', backgroundColor: '#dcfce7', color: '#006e2f', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', padding: '6px 16px', borderRadius: '9999px', marginBottom: '20px', textTransform: 'uppercase' }}>
+            Trusted Pet Store
+          </span>
+          <h1 style={{ fontSize: 'clamp(32px, 6vw, 64px)', fontWeight: 800, color: '#121c2a', lineHeight: 1.15, marginBottom: '16px', fontFamily: "'Hanken Grotesk', sans-serif" }}>
+            Pets, Food & Toys<br />
+            <span style={{ color: '#006e2f', fontStyle: 'italic', fontWeight: 700 }}>all in one place</span>.
+          </h1>
+          <p style={{ fontSize: 'clamp(14px, 2vw, 18px)', color: '#5d5f5f', marginBottom: '28px', lineHeight: 1.6, maxWidth: '480px' }}>
+            Healthy dogs & cats for adoption, premium pet food, and fun toys — everything your furry friend needs, delivered to your door.
+          </p>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <Link to="/category/dogs" style={{ backgroundColor: '#006e2f', color: 'white', padding: '14px 28px', borderRadius: '14px', fontWeight: 700, fontSize: '15px', textDecoration: 'none', display: 'inline-block' }}>
+              Browse Dogs
             </Link>
-            <Link to="/category/cats">
-              <Button variant="secondary" size="lg">Browse Cats</Button>
+            <Link to="/category/cats" style={{ backgroundColor: 'white', color: '#006e2f', padding: '14px 28px', borderRadius: '14px', fontWeight: 700, fontSize: '15px', textDecoration: 'none', border: '2px solid #006e2f', display: 'inline-block' }}>
+              Browse Cats
             </Link>
           </div>
         </div>
-        <div className="absolute right-0 top-0 w-1/2 h-full hidden lg:block">
-          <div className="w-full h-full bg-cover bg-center rounded-l-[80px]" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5uYGOStypKu65qeHgohTwWezKByN9OtMAjnDxAsCnP0IhRsCJ5r5Bj5Pxvn_bg-ri89myGBjoHqYGR_Jk0AY6bxdi7VNvtUf8P4o7DjqAcoytqAy2EvFJDExmxKTxXEDyzI5dDwjzJsdAK0sLkBupN2rlWkXPNfAhqNiz2Hrm7anqvZsYK3YT7M8qcaOX69krTbCWJlwPDKvQYVIiIv04KflDo1MbX-m8BwB-sp8fJ5gHB_hKZjplJrTCusCZLP0CuO5EwbUanQs')"}}></div>
-        </div>
+        {/* Decorative blobs */}
+        <div style={{ position: 'absolute', right: '-60px', top: '-60px', width: '320px', height: '320px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.06, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '80px', bottom: '-40px', width: '180px', height: '180px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.08, pointerEvents: 'none' }} />
       </section>
 
-      {/* Categories Bento Grid */}
-      <section className="py-24 px-margin-desktop max-w-container-max mx-auto max-md:px-margin-mobile w-full">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface">Shop by Category</h2>
-            <p className="text-secondary mt-2">Pets, food & toys — everything for your dog or cat.</p>
+      {/* ── Shop by Category ── */}
+      <section style={{ padding: 'clamp(36px, 6vw, 80px) clamp(16px, 5vw, 64px)' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'clamp(20px, 4vw, 40px)', gap: '12px', flexWrap: 'wrap' }}>
+            <div>
+              <h2 style={{ fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 800, color: '#121c2a', margin: 0 }}>Shop by Category</h2>
+              <p style={{ color: '#5d5f5f', marginTop: '6px', fontSize: '14px' }}>Pets, food & toys — everything for your dog or cat.</p>
+            </div>
+            <Link to="/shop" style={{ color: '#006e2f', fontWeight: 700, fontSize: '14px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}>
+              View All <MdArrowForward size={18} />
+            </Link>
           </div>
-          <Link to="/shop" className="text-primary font-label-lg flex items-center gap-2 hover:gap-3 transition-all">
-            View All <MdArrowForward size={20} />
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-gutter">
-          {/* Dogs */}
-          <Link to="/category/dogs" className="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-card h-52">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOeAx_XXUIwFQ6_tGUkahtUCuLseVNALVe_bLnae4939SyaJiRLRG0jkC66PEeFuVj_EqnCpqIXuLpzZcjnfXbP2cHw3pZfsVc0aYl4SYKdgcN4TgsBNCB4M0EVZ2yD7LXt1qW48Us6UJfq3g5_QyYr7Rd5MLv6RVhzs4HMZOU7uqrwknJzptY56MTksgwMVehahRf7MZKMmv8C_8QbIhk18M0Zsdhclbx_X7MGBvPX1xRIEdRppI22novwF64MnhRmw3vQpkTW3E')"}}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <div className="absolute bottom-5 left-5">
-              <h3 className="text-white font-bold text-lg">Dogs & Puppies</h3>
-              <p className="text-white/75 text-sm">Purebred & mixed breeds</p>
-            </div>
-          </Link>
-
-          {/* Cats */}
-          <Link to="/category/cats" className="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-card h-52">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1e1eUEsePwjkJvdTeUASaHwC1z0JK5rYzfMtXRxUvXtHozSoX0cq05nkW2jg--pH9qZiqfWEq03uA4zZJPHjSsLtTqFsaGbbw6HJA2z3LpLrVKQOHwvMyju4sGAbeTVGj2BM7bb29AZmFuDeM08ts0TQ4WEn0ii0A_d9OCM4Y6zdVHk5FwFi6IjdPKOSRBjY5JulbpFBiV8_AucgXsO9IRRGlSnyqAn7nUoDv0YBlvLawtWExl8-AMJVmxuZ1BkeFTZJ1TmRW9wk')"}}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <div className="absolute bottom-5 left-5">
-              <h3 className="text-white font-bold text-lg">Cats & Kittens</h3>
-              <p className="text-white/75 text-sm">Affectionate companions</p>
-            </div>
-          </Link>
-
-          {/* Dog Food */}
-          <Link to="/category/dog-food" className="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-card h-52">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDM-N73pCkUhUyRM_6tAolvYzebyHUblrX8FIkpPWmXKTuKr9dcRlUuMwfYztCClMghYRmsWl3r0qO1vPrkuwMNSzrng8V8y33fqdJ4-gSW2FJkCo5vIwMWi2Hoc_oAHIfJ1V_bfbGmXUxAyJ2Ao8IyXKS4HvHg-56LLkZ6lqxdp9r1N7aXsdzfDYQLn-ZdxIbyzp8yBL7yrZ0oo6qc9ls6DCU8nnMLEySN3UEmO_jTuI9q18dPu0sETFs-OMtIm9-ndb2R3iB0-ZM')"}}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <div className="absolute bottom-5 left-5">
-              <h3 className="text-white font-bold text-lg">Dog Food</h3>
-              <p className="text-white/75 text-sm">Premium nutrition</p>
-            </div>
-          </Link>
-
-          {/* Cat Food */}
-          <Link to="/category/cat-food" className="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-card h-52">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{backgroundImage: "url('https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=600&q=80')"}}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <div className="absolute bottom-5 left-5">
-              <h3 className="text-white font-bold text-lg">Cat Food</h3>
-              <p className="text-white/75 text-sm">Gourmet feline meals</p>
-            </div>
-          </Link>
-
-          {/* Dog Toys */}
-          <Link to="/category/dog-toys" className="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-card h-52">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDSjHtOV5d_8tzTvmW6w2V0LLHQkw6dvomN_Q4SmF6ficDdHNeNB9zIa3GzXHDkbU6E5TBNviJiF5nwg_B5Z_uJTf_5S1LfniUx4uiwWxiWZ2gFhroR-y7dVCBv4nYWfEVFe6iUOMjqkT7d66HRKqkr6iahwZGxK5W8_pvRBjPhdtA6y9p1kacScscpzExrBL6Qzf9Av81lhzg7jwAJz8rBmbrYkEqFVSq744sODEcauAYCivmZKM--82v7eiUSr1X9Ld6OJqZnR-w')"}}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <div className="absolute bottom-5 left-5">
-              <h3 className="text-white font-bold text-lg">Dog Toys</h3>
-              <p className="text-white/75 text-sm">Fun & engaging play</p>
-            </div>
-          </Link>
-
-          {/* Cat Toys */}
-          <Link to="/category/cat-toys" className="relative group cursor-pointer overflow-hidden rounded-3xl bg-surface-container-high shadow-card h-52">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTgtx3kNhw95J8at-x5V_T-D1qatcszJ0r5yL6mArjUl1PDqJTwYHWpGHc4l6KQ2OtsAguOLhvCZXVbAQG7q-CpLPMLIIcLVIbE0JK8NUFTQZ6CTnHspWOkbyV_1f_t5BUw105EC8mtlYWeNf047cu0ZIYOreh3Kd3cA6gsVyG7LbtQ0WJxxLjhBo4BM6w5u_HRXMfKvCBWJC7vHNVufl9DovbqpBDQIb6iSdw8itJu3tC29Dy9wFBVyc22zQzvE-e2SKU3NzFzwE')"}}></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
-            <div className="absolute bottom-5 left-5">
-              <h3 className="text-white font-bold text-lg">Cat Toys</h3>
-              <p className="text-white/75 text-sm">Interactive & catnip toys</p>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="py-24 px-margin-desktop max-w-container-max mx-auto max-md:px-margin-mobile w-full">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface">Featured Listings</h2>
-            <p className="text-secondary mt-2">Top picks — pets, food & toys hand-selected for you.</p>
-          </div>
-          <Link to="/shop" className="text-primary font-label-lg flex items-center gap-2 hover:gap-3 transition-all">
-            View All <MdArrowForward size={20} />
-          </Link>
-        </div>
-        {isLoading ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '32px' }}>
-            {[1,2,3,4].map(i => (
-              <div key={i} style={{ aspectRatio: '4/5', borderRadius: '24px', backgroundColor: '#F1F5F9', animation: 'shimmer 2s infinite linear' }}></div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(160px, 100%), 1fr))', gap: '12px' }}>
+            {categories.map(cat => (
+              <Link
+                key={cat.slug}
+                to={`/category/${cat.slug}`}
+                style={{ position: 'relative', overflow: 'hidden', borderRadius: '20px', height: 'clamp(140px, 22vw, 200px)', display: 'block', textDecoration: 'none', backgroundColor: '#1e293b', flexShrink: 0 }}
+              >
+                <img
+                  src={cat.img}
+                  alt={cat.label}
+                  loading="lazy"
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                  onMouseEnter={e => e.target.style.transform = 'scale(1.08)'}
+                  onMouseLeave={e => e.target.style.transform = 'scale(1)'}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)' }} />
+                <div style={{ position: 'absolute', bottom: '12px', left: '12px', right: '8px' }}>
+                  <p style={{ color: 'white', fontWeight: 700, fontSize: 'clamp(13px, 2.5vw, 16px)', margin: 0, lineHeight: 1.2 }}>{cat.label}</p>
+                  <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 'clamp(10px, 1.8vw, 13px)', margin: '3px 0 0', lineHeight: 1.3 }}>{cat.sub}</p>
+                </div>
+              </Link>
             ))}
           </div>
-        ) : featuredProducts.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '32px' }}>
-            {featuredProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div style={{ textAlign: 'center', padding: '48px', color: '#5d5f5f' }}>
-            <p style={{ fontSize: '15px' }}>Our featured products are coming soon. Check back shortly!</p>
-          </div>
-        )}
-      </section>
-
-      {/* Newsletter */}
-      <section className="py-24 px-margin-desktop bg-surface-container-lowest max-md:px-margin-mobile">
-        <div className="max-w-container-max mx-auto bg-primary rounded-[48px] p-12 md:p-24 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <svg height="100%" preserveAspectRatio="none" viewBox="0 0 100 100" width="100%">
-              <pattern height="10" id="grid" patternUnits="userSpaceOnUse" width="10">
-                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5"></path>
-              </pattern>
-              <rect fill="url(#grid)" height="100%" width="100%"></rect>
-            </svg>
-          </div>
-          <div className="relative z-10 max-w-xl text-center md:text-left">
-            <h2 className="font-headline-lg text-white text-[40px] leading-tight mb-6">Never miss a new <span className="italic font-normal">arrival</span>.</h2>
-            <p className="text-white/80 text-body-lg">New puppies, kittens, food deals & toys added weekly. Be the first to know and get 10% off your first order.</p>
-          </div>
-          <div className="relative z-10 w-full max-w-md">
-            <form className="flex flex-col sm:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="Email Address" className="flex-1 px-8 py-5 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:bg-white/20 focus:outline-none focus:ring-2 focus:ring-primary-fixed-dim transition-all" />
-              <button type="submit" className="bg-white text-primary px-8 py-5 rounded-2xl font-label-lg hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors shadow-xl">Subscribe</button>
-            </form>
-            <p className="text-white/40 text-label-sm mt-4 text-center md:text-left">We respect your privacy. No spam, ever.</p>
-          </div>
         </div>
       </section>
+
+      {/* ── Featured Listings ── */}
+      <section style={{ padding: 'clamp(36px, 6vw, 80px) clamp(16px, 5vw, 64px)', backgroundColor: '#f8fafc' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'clamp(20px, 4vw, 40px)', gap: '12px', flexWrap: 'wrap' }}>
+            <div>
+              <h2 style={{ fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 800, color: '#121c2a', margin: 0 }}>Featured Listings</h2>
+              <p style={{ color: '#5d5f5f', marginTop: '6px', fontSize: '14px' }}>Top picks — pets, food & toys hand-selected for you.</p>
+            </div>
+            <Link to="/shop" style={{ color: '#006e2f', fontWeight: 700, fontSize: '14px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}>
+              View All <MdArrowForward size={18} />
+            </Link>
+          </div>
+
+          {isLoading ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(160px, 100%), 1fr))', gap: '16px' }}>
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} style={{ aspectRatio: '4/5', borderRadius: '20px', backgroundColor: '#e2e8f0', animation: 'pulse 1.5s ease-in-out infinite' }} />
+              ))}
+            </div>
+          ) : featuredProducts.length > 0 ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(170px, 100%), 1fr))', gap: '16px' }}>
+              {featuredProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '48px', color: '#9ca3af', backgroundColor: 'white', borderRadius: '16px', border: '2px dashed #e2e8f0' }}>
+              <p style={{ fontSize: '32px', marginBottom: '12px' }}>🐾</p>
+              <p style={{ fontWeight: 600, color: '#5d5f5f' }}>Our featured products are coming soon!</p>
+              <p style={{ fontSize: '13px', marginTop: '4px' }}>Check back shortly or browse all listings.</p>
+              <Link to="/shop" style={{ display: 'inline-block', marginTop: '16px', backgroundColor: '#006e2f', color: 'white', padding: '10px 24px', borderRadius: '10px', fontWeight: 700, textDecoration: 'none', fontSize: '14px' }}>Browse Shop</Link>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── Newsletter ── */}
+      <section style={{ padding: 'clamp(36px, 6vw, 80px) clamp(16px, 5vw, 64px)', backgroundColor: 'white' }}>
+        <div style={{
+          maxWidth: '1280px', margin: '0 auto',
+          backgroundColor: '#006e2f', borderRadius: 'clamp(20px, 4vw, 48px)',
+          padding: 'clamp(28px, 5vw, 64px)',
+          display: 'flex', flexDirection: 'column', gap: '24px',
+          position: 'relative', overflow: 'hidden',
+        }}>
+          {/* Grid overlay */}
+          <div style={{ position: 'absolute', inset: 0, opacity: 0.07, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontSize: 'clamp(22px, 5vw, 40px)', fontWeight: 800, color: 'white', margin: '0 0 10px', lineHeight: 1.2 }}>
+              Never miss a new <em style={{ fontWeight: 400 }}>arrival</em>.
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: 'clamp(13px, 2vw, 16px)', margin: 0, maxWidth: '480px' }}>
+              New puppies, kittens, food deals & toys added weekly. Be the first to know and get 10% off your first order.
+            </p>
+          </div>
+
+          <form
+            onSubmit={e => e.preventDefault()}
+            style={{ position: 'relative', zIndex: 1, display: 'flex', gap: '10px', flexWrap: 'wrap' }}
+          >
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              style={{
+                flex: 1, minWidth: '200px', padding: '14px 18px', borderRadius: '12px',
+                backgroundColor: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)',
+                color: 'white', fontSize: '14px', outline: 'none',
+              }}
+            />
+            <button
+              type="submit"
+              style={{ padding: '14px 24px', borderRadius: '12px', backgroundColor: 'white', color: '#006e2f', fontWeight: 700, fontSize: '14px', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}
+            >
+              Subscribe
+            </button>
+          </form>
+          <p style={{ position: 'relative', zIndex: 1, color: 'rgba(255,255,255,0.5)', fontSize: '12px', margin: 0 }}>
+            We respect your privacy. No spam, ever.
+          </p>
+        </div>
+      </section>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `}</style>
     </div>
   );
 }
