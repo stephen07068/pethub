@@ -138,10 +138,10 @@ export default function CryptoPayment() {
             ))}
           </div>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center bg-white rounded-2xl p-8 border border-border-light shadow-sm">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-white rounded-2xl p-4 sm:p-8 border border-border-light shadow-sm">
             {/* QR Code Column */}
             <div className="flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-border-light pb-8 md:pb-0 md:pr-8">
-              <div className="w-48 h-48 bg-surface-subtle border border-border-light rounded-xl flex items-center justify-center mb-6 relative overflow-hidden group">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 bg-surface-subtle border border-border-light rounded-xl flex items-center justify-center mb-6 relative overflow-hidden group">
                 <img
                   src={qrUrl}
                   alt={`${selectedCoin.toUpperCase()} QR Code`}
@@ -159,18 +159,18 @@ export default function CryptoPayment() {
             </div>
             
             {/* Address Column */}
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center pt-8 md:pt-0">
               <label className="font-label-lg text-on-surface-variant mb-2">Deposit Address</label>
-              <div className="flex bg-surface-subtle p-1 rounded-xl border border-border-light mb-8">
+              <div className="flex bg-surface-subtle p-1 rounded-xl border border-border-light mb-8 max-w-full">
                 <input 
                   type="text" 
                   readOnly 
                   value={walletAddress || 'Loading...'}
-                  className="flex-1 bg-transparent px-4 font-mono text-sm text-secondary outline-none truncate"
+                  className="flex-1 min-w-0 bg-transparent px-2 sm:px-4 font-mono text-xs sm:text-sm text-secondary outline-none truncate"
                 />
                 <button 
                   onClick={copyAddress}
-                  className={`px-4 py-3 rounded-lg flex items-center gap-2 font-label-sm transition-all ${
+                  className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg flex items-center gap-1 sm:gap-2 font-label-sm transition-all shrink-0 ${
                     copied ? 'bg-primary text-white' : 'bg-white border border-border-light text-on-surface hover:bg-surface'
                   }`}
                 >
@@ -226,7 +226,7 @@ export default function CryptoPayment() {
             You can easily buy Bitcoin, USDT, or other cryptocurrencies using your credit card, debit card, or bank account from these trusted platforms:
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: 'MoonPay', url: 'https://www.moonpay.com/buy', desc: 'Fastest with Card', Icon: FaCreditCard, iconColor: 'text-[#7A00F0]' },
               { name: 'Coinbase', url: 'https://www.coinbase.com', desc: 'Most Popular', Icon: SiCoinbase, iconColor: 'text-[#0052FF]' },
@@ -238,14 +238,14 @@ export default function CryptoPayment() {
                 href={platform.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center p-4 bg-white border border-border-light rounded-2xl hover:border-blue-400 hover:shadow-md transition-all group relative overflow-hidden"
+                className="flex flex-col items-center justify-center p-3 sm:p-4 bg-white border border-border-light rounded-2xl hover:border-blue-400 hover:shadow-md transition-all group relative overflow-hidden"
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center bg-gray-50 mb-3 group-hover:scale-110 transition-transform ${platform.iconColor}`}>
-                  <platform.Icon size={24} />
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-gray-50 mb-2 sm:mb-3 group-hover:scale-110 transition-transform ${platform.iconColor}`}>
+                  <platform.Icon size={20} className="sm:w-6 sm:h-6 w-5 h-5" />
                 </div>
-                <span className="font-bold text-on-surface group-hover:text-blue-600 transition">{platform.name}</span>
-                <span className="text-[11px] text-secondary mt-1 text-center">{platform.desc}</span>
-                <div className="absolute top-3 right-3 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="font-bold text-on-surface group-hover:text-blue-600 transition text-sm sm:text-base text-center">{platform.name}</span>
+                <span className="text-[10px] sm:text-[11px] text-secondary mt-1 text-center">{platform.desc}</span>
+                <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
                   <MdOpenInNew size={14} />
                 </div>
               </a>

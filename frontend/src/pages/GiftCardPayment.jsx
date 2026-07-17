@@ -380,7 +380,7 @@ export default function GiftCardPayment() {
                 <p className="text-secondary text-sm mb-4">
                   Purchase a digital {brand.name} online and get the code instantly via email — no scratching needed!
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <a
                     href={brand.g2a}
                     target="_blank"
@@ -390,7 +390,7 @@ export default function GiftCardPayment() {
                     <div className="w-12 h-12 rounded-full flex items-center justify-center bg-orange-50 mb-3 group-hover:scale-110 transition-transform text-[#FF5E00]">
                       <SiG2A size={24} />
                     </div>
-                    <span className="font-bold text-on-surface group-hover:text-orange-600 transition">Buy on G2A.com</span>
+                    <span className="font-bold text-on-surface group-hover:text-orange-600 transition text-center">Buy on G2A.com</span>
                     <span className="text-[11px] text-secondary mt-1 text-center">Fast Delivery</span>
                     <div className="absolute top-3 right-3 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
                       <MdOpenInNew size={14} />
@@ -406,7 +406,7 @@ export default function GiftCardPayment() {
                     <div className="w-12 h-12 rounded-full flex items-center justify-center bg-purple-50 mb-3 group-hover:scale-110 transition-transform text-[#5D38A4]">
                       <MdLocalPlay size={24} />
                     </div>
-                    <span className="font-bold text-on-surface group-hover:text-purple-600 transition">Buy on Eneba.com</span>
+                    <span className="font-bold text-on-surface group-hover:text-purple-600 transition text-center">Buy on Eneba.com</span>
                     <span className="text-[11px] text-secondary mt-1 text-center">Instant Code</span>
                     <div className="absolute top-3 right-3 text-purple-500 opacity-0 group-hover:opacity-100 transition-opacity">
                       <MdOpenInNew size={14} />
@@ -543,7 +543,7 @@ export default function GiftCardPayment() {
                   )}
 
                   {/* ── Always-visible tab switcher ── */}
-                  <div className="grid grid-cols-2 gap-3 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 <button
                   onClick={() => { setSubmitMethod('photo'); setCardCode(''); }}
                   className={`flex flex-col items-center gap-2 py-4 px-3 rounded-2xl border-2 transition-all ${
@@ -646,13 +646,13 @@ export default function GiftCardPayment() {
                         onClick={() => { setCardImage(null); setCaptureMethod('camera'); }}
                         className="flex items-center justify-center gap-2 py-4 border-2 border-dashed border-primary/40 rounded-xl hover:border-primary hover:bg-primary/5 transition text-sm font-semibold text-primary"
                       >
-                        <MdCameraAlt size={20} /> Use Camera
+                        <MdCameraAlt size={20} className="shrink-0" /> <span className="truncate">Use Camera</span>
                       </button>
                       <button
                         onClick={() => { setCardImage(null); fileInputRef.current?.click(); }}
                         className="flex items-center justify-center gap-2 py-4 border-2 border-dashed border-primary/40 rounded-xl hover:border-primary hover:bg-primary/5 transition text-sm font-semibold text-primary"
                       >
-                        <MdUploadFile size={20} /> Upload File(s)
+                        <MdUploadFile size={20} className="shrink-0" /> <span className="truncate">Upload File(s)</span>
                       </button>
                       <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleFileUpload} />
                     </div>
