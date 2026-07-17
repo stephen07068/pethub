@@ -32,52 +32,47 @@ export default function Home() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden flex flex-col md:flex-row items-center justify-between" style={{
-        background: 'linear-gradient(135deg, #eff4ff 0%, #f0fdf4 100%)',
-        padding: 'clamp(40px, 8vw, 96px) clamp(16px, 5vw, 64px)',
-        gap: 'clamp(32px, 5vw, 64px)'
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        padding: 'clamp(80px, 12vw, 160px) clamp(16px, 5vw, 64px)',
+        display: 'flex', alignItems: 'center',
+        minHeight: 'clamp(500px, 70vh, 700px)',
       }}>
-        <div className="w-full md:w-1/2" style={{ maxWidth: '600px', zIndex: 10, position: 'relative' }}>
-          <span style={{ display: 'inline-block', backgroundColor: '#dcfce7', color: '#006e2f', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', padding: '6px 16px', borderRadius: '9999px', marginBottom: '20px', textTransform: 'uppercase' }}>
+        {/* Background Image */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 1,
+          backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5uYGOStypKu65qeHgohTwWezKByN9OtMAjnDxAsCnP0IhRsCJ5r5Bj5Pxvn_bg-ri89myGBjoHqYGR_Jk0AY6bxdi7VNvtUf8P4o7DjqAcoytqAy2EvFJDExmxKTxXEDyzI5dDwjzJsdAK0sLkBupN2rlWkXPNfAhqNiz2Hrm7anqvZsYK3YT7M8qcaOX69krTbCWJlwPDKvQYVIiIv04KflDo1MbX-m8BwB-sp8fJ5gHB_hKZjplJrTCusCZLP0CuO5EwbUanQs')",
+          backgroundSize: 'cover', backgroundPosition: 'center',
+        }} />
+        
+        {/* Dark Overlay for Text Readability */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 2,
+          background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%)',
+        }} />
+
+        <div className="w-full" style={{ maxWidth: '640px', zIndex: 10, position: 'relative' }}>
+          <span style={{ display: 'inline-block', backgroundColor: 'rgba(255,255,255,0.2)', color: 'white', backdropFilter: 'blur(4px)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', padding: '6px 16px', borderRadius: '9999px', marginBottom: '20px', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.3)' }}>
             Trusted Pet Store
           </span>
-          <h1 style={{ fontSize: 'clamp(32px, 6vw, 64px)', fontWeight: 800, color: '#121c2a', lineHeight: 1.15, marginBottom: '16px', fontFamily: "'Hanken Grotesk', sans-serif" }}>
+          <h1 style={{ fontSize: 'clamp(40px, 8vw, 72px)', fontWeight: 800, color: 'white', lineHeight: 1.1, marginBottom: '20px', fontFamily: "'Hanken Grotesk', sans-serif" }}>
             Pets, Food & Toys<br />
-            <span style={{ color: '#006e2f', fontStyle: 'italic', fontWeight: 700 }}>all in one place</span>.
+            <span style={{ color: '#6bff8f', fontStyle: 'italic', fontWeight: 700 }}>all in one place</span>.
           </h1>
-          <p style={{ fontSize: 'clamp(14px, 2vw, 18px)', color: '#5d5f5f', marginBottom: '28px', lineHeight: 1.6, maxWidth: '480px' }}>
+          <p style={{ fontSize: 'clamp(15px, 2.5vw, 20px)', color: 'rgba(255,255,255,0.9)', marginBottom: '36px', lineHeight: 1.6, maxWidth: '540px' }}>
             Healthy dogs & cats for adoption, premium pet food, and fun toys — everything your furry friend needs, delivered to your door.
           </p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <Link to="/category/dogs" style={{ backgroundColor: '#006e2f', color: 'white', padding: '14px 28px', borderRadius: '14px', fontWeight: 700, fontSize: '15px', textDecoration: 'none', display: 'inline-block' }}>
+            <Link to="/category/dogs" style={{ backgroundColor: '#006e2f', color: 'white', padding: '16px 32px', borderRadius: '14px', fontWeight: 700, fontSize: '16px', textDecoration: 'none', display: 'inline-block', boxShadow: '0 4px 14px rgba(0,110,47,0.4)' }}>
               Browse Dogs
             </Link>
-            <Link to="/category/cats" style={{ backgroundColor: 'white', color: '#006e2f', padding: '14px 28px', borderRadius: '14px', fontWeight: 700, fontSize: '15px', textDecoration: 'none', border: '2px solid #006e2f', display: 'inline-block' }}>
+            <Link to="/category/cats" style={{ backgroundColor: 'white', color: '#121c2a', padding: '16px 32px', borderRadius: '14px', fontWeight: 700, fontSize: '16px', textDecoration: 'none', display: 'inline-block', boxShadow: '0 4px 14px rgba(0,0,0,0.1)' }}>
               Browse Cats
             </Link>
           </div>
         </div>
-        
-        {/* Hero Image */}
-        <div className="w-full md:w-1/2 relative flex justify-center z-10 mt-4 md:mt-0">
-          <img 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5uYGOStypKu65qeHgohTwWezKByN9OtMAjnDxAsCnP0IhRsCJ5r5Bj5Pxvn_bg-ri89myGBjoHqYGR_Jk0AY6bxdi7VNvtUf8P4o7DjqAcoytqAy2EvFJDExmxKTxXEDyzI5dDwjzJsdAK0sLkBupN2rlWkXPNfAhqNiz2Hrm7anqvZsYK3YT7M8qcaOX69krTbCWJlwPDKvQYVIiIv04KflDo1MbX-m8BwB-sp8fJ5gHB_hKZjplJrTCusCZLP0CuO5EwbUanQs"
-            alt="Happy pets"
-            style={{
-              width: '100%',
-              maxWidth: '540px',
-              height: 'clamp(300px, 40vw, 500px)',
-              objectFit: 'cover',
-              borderRadius: '32px',
-              boxShadow: '0 25px 50px -12px rgba(0, 110, 47, 0.25)'
-            }}
-          />
-        </div>
-
-        {/* Decorative blobs */}
-        <div style={{ position: 'absolute', right: '-60px', top: '-60px', width: '320px', height: '320px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.06, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', right: '40%', bottom: '-40px', width: '180px', height: '180px', borderRadius: '50%', backgroundColor: '#006e2f', opacity: 0.08, pointerEvents: 'none' }} />
       </section>
+
 
 
       {/* ── Shop by Category ── */}
